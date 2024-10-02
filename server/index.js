@@ -32,10 +32,10 @@ app.get('/login', (req, res) => {
     res.sendFile('pages/login.html', { root: serverPublic })
 })
 
-// Form Route
+// About Route
 
-app.get('/form', (req, res) => {
-    res.sendFile('pages/form.html', { root: serverPublic });
+app.get('/about', (req, res) => {
+    res.sendFile('pages/about.html', { root: serverPublic });
 })
 
 // Retrieve Data from signup and store it
@@ -54,9 +54,9 @@ app.post('/submit-form', async (req, res) => {
             users = []
         }
         // find or create user
-        let user = users.find(u => u.email === email && u.username === username)
+        let user = users.find(u => u.email === email && u.username === username && u.password === password)
         if (user) {
-            user.password.push(password)
+            alert('User already exist')
         } else {
             user = { username, email, password };
             users.push(user);
@@ -64,7 +64,7 @@ app.post('/submit-form', async (req, res) => {
 
         // save updated users
         await fs.writeFile(dataPath, JSON.stringify(users, null, 2));
-        res.redirect('/form');
+        res.redirect('/signup');
     } catch (error) {
         console.error('Error processing form:', error);
         res.status(500).send('An error occurred while processing your submission.');
