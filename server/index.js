@@ -38,6 +38,40 @@ app.get('/form', (req, res) => {
     res.sendFile('pages/form.html', { root: serverPublic });
 })
 
+// Retrieve Data from signup and store it
+
+app.post('/submit-form', async (req, res) => {
+    try {
+        const { username, email, password } = req.body;
+        // read existing users from file
+        let users = []
+        try {
+            const data = await fs.readFile(dataPath, 'utf8');
+            users = JSON.parse(data)
+        } catch (error) {
+            // if file doesn't exist or is empty, start with an empty array
+            console.error('Error reading user data', error);
+            users = []
+        }
+        // find or create user
+        let user = users.find(u => u.email === email && u.username === username)
+        if (user) {
+            user.password.push(password)
+        } else {
+            user = { username, email, password };
+            users.push(user);
+        }
+
+        // save updated users
+        await fs.writeFile(dataPath, JSON.stringify(users, null, 2));
+        res.redirect('/form');
+    } catch (error) {
+        console.error('Error processing form:', error);
+        res.status(500).send('An error occurred while processing your submission.');
+    }
+
+})
+
 
 // Start the server
 const PORT = process.env.PORT || 3000;
