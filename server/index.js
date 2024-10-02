@@ -24,8 +24,16 @@ app.get('/', (req, res) => {
     res.sendFile('index.html', { root: clientPath });
 })
 
+// Sign up and Login Route
+app.get('/signup', (req, res) => {
+    res.sendFile('pages/signup.html', { root: serverPublic})
+})
+app.get('/login', (req, res) => {
+    res.sendFile('pages/login.html', { root: serverPublic })
+})
+
 // Form Route
 
-app.get('/form', (res, req) => {
+app.get('/form', (req, res) => {
     res.sendFile('pages/form.html', { root: serverPublic });
 })
