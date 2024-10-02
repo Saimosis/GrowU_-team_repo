@@ -37,3 +37,10 @@ app.get('/login', (req, res) => {
 app.get('/form', (req, res) => {
     res.sendFile('pages/form.html', { root: serverPublic });
 })
+
+
+// Start the server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+});
