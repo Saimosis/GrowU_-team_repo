@@ -57,7 +57,7 @@ app.post('/submit-form', async (req, res) => {
         // find or create user
         let user = users.find(u => u.email === email && u.username === username && u.password === password)
         if (user) {
-            alert('User already exist');
+            res.status(409).json({ message: 'This user already exist', user: true })
         } else {
             user = { username, email, password };
             users.push(user);
