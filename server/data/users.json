@@ -1,7 +1,12 @@
 [
-    {
-        "username": "coolguy24",
-        "email": "coolguy24@gmail.com",
-        "password": "thisguyiscool24"
-    }
+  {
+    "username": "coolguy24",
+    "email": "coolguy24@gmail.com",
+    "password": "thisguyiscool24"
+  },
+  {
+    "username": "Saimosis",
+    "email": "poo@poop.com",
+    "password": "poop24popp"
+  }
 ]
