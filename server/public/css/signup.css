@@ -30,11 +30,12 @@ body {
 }
 
 .input-wrapper {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  div {
+  /* background-color: red; */
+  /* display: grid; */
+  /* grid-template-columns: 1fr 1fr; */
+  /* div {
     margin: 0.5em;
-  }
+  } */
 }
 
 .submit-wrapper {
@@ -49,8 +50,8 @@ body {
   padding-left: 2vh;
   padding-right: 2vh;
   font-weight: 600;
-  font-size: 3vh;
-  width: auto;
+  font-size: 1.3em;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
@@ -63,14 +64,18 @@ body {
   /* border: 0.5vh solid white; */
 }
 
-.create-input {
-  height: 5vh;
-  font-size: 1.2em;
-}
-
-.create-label {
-  height: 5vh;
-  text-align: right;
-  display: block;
-  font-size: 1.2em;
+.item-wrapper {
+    width: max-content;
+    font-size: 1.2em;
+    margin: auto;
+    margin-bottom: 1em;
+    /* margin: 1vw; */
+    label {
+        display: block;
+        margin-bottom: .5em;
+    }
+    input {
+        display: block;
+        width: 100%;
+    }
 }
