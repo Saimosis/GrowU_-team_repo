@@ -11,7 +11,7 @@
       <div class="col"></div>
       <div class="col" id="form-col">
         <h1 class="lexend">Log In</h1>
-        <form action="/log-in" method="POST" id="create-form">
+        <form id="create-form">
           <div class="input-wrapper">
             <div class="item-wrapper">
               <label class="lexend" for="username-input">Username:</label>
@@ -64,6 +64,20 @@
       loginDiv.addEventListener("click", (e) => {
         window.location.href = "/signup";
       })
-        </script>
+            try {
+            const response = await fetch('/log-in'
+            );
+            if (!response.ok) {
+               throw new Error("Problem fetching delete endpoint");
+            }
+            const data = await response.json();
+            // console.log(data);
+            // if (data.reload) {
+            //     window.location.reload();
+            // }
+          } catch (error) {
+            console.error("there was a problem, skill issue" + error.message + "GG bro. Keep mogging.");
+          }
+    </script>
   </body>
 </html>

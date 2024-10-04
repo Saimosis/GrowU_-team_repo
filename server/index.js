@@ -17,8 +17,6 @@ app.use(express.static(serverPublic)); // Serve static files from client directo
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 app.use(express.json()); // Parse JSON bodies
 
-let loggedIn = false;
-
 // Routes
 
 // Home Route
@@ -75,8 +73,7 @@ app.post('/submit-form', async (req, res) => {
 
 })
 
-
-app.post('/log-in', async (req, res) => {
+app.get('/log-in', async (req, res) => {
     try {
         const { username, email, password } = req.body;
         // read existing users from file
@@ -94,7 +91,6 @@ app.post('/log-in', async (req, res) => {
         if (user) {
             // res.status(409).json({ message: 'This user already exist', user: true })
             // allow user access to the website
-            loggedIn = true;
             console.log(loggedIn);
             // res.status(200).json({ message: 'Successfully logged in', user: true })
         } else {
