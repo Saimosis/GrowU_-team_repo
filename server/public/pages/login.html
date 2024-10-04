@@ -1,11 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Log In</title>
+    <link rel="stylesheet" href="/css/signup.css" />
+  </head>
+  <body>
+    <div id="signup-wrapper">
+      <div class="col"></div>
+      <div class="col" id="form-col">
+        <h1 class="lexend">Log In</h1>
+        <form action="/log-in" method="POST" id="create-form">
+          <div class="input-wrapper">
+            <div class="item-wrapper">
+              <label class="lexend" for="username-input">Username:</label>
+              <input
+                class="lexend"
+                name="username"
+                id="username-input"
+                type="text"
+                required
+              />
+            </div>
+            <div class="item-wrapper">
+              <label class="lexend" for="email-input">Email:</label>
+              <input
+                class="lexend"
+                name="email"
+                id="email-input"
+                type="email"
+                required
+              />
+            </div>
+            <div class="item-wrapper">
+              <label class="lexend" for="password-input">Password:</label>
+              <input
+                name="password"
+                id="password-input"
+                type="text"
+                class="lexend"
+                required
+              />
+            </div>
+            <div class="item-wrapper">
+              <div class="submit-wrapper">
+                <button type="submit" class="submit lexend">Submit</button>
+              </div>
+            </div>
+            <hr />
+            <div class="item-wrapper">
+              <div class="submit-wrapper">
+                <p class="lexend">Need to make an account?</p>
+                <div id="login-div" class="lexend submit">Sign Up</div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script>
+      let loginDiv = document.getElementById("login-div");
+      loginDiv.addEventListener("click", (e) => {
+        window.location.href = "/signup";
+      })
+    </script>
+  </body>
 </html>
