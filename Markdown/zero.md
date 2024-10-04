@@ -26,3 +26,17 @@ I am using codepen, google, and dribble to research different design ideas.
 
 ## What is 1 resource you are using to collaborate better with your teamates?
 We are using canva to whiteboard ideas.
+
+# DAY 3 10/3/2024
+
+## Do you believe you are giving your best effort to the team?
+Yeah, I believe I am trying my best. I hope my efforts are seen.
+
+## What is one way you hope to improve your site by the end of the week?
+I hope to make the divs and make it like the typical website you can see.
+'
+## What is one technical challenge that is currently keeping you from moving forward in your project?
+One techincal challenge is probably just remembering basic css.
+
+## What is 1 way you can support your team better moving forward?
+I'd like to contribute more by doing more css and making the nav bar, and footer.
