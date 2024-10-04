@@ -10,3 +10,9 @@
 > A new challenge that arose today was CSS. It is very time consuming. Another one was resolving merge conflicts.
 > 1 resource I am using to learn/research is the Super Squad project and Stack Overflow.
 > 1 resource I'm using to collaborate with my teammates is Canva.
+
+## 10/3/2024
+> I believe I am 100% giving my best effort to the team.
+> One way I hope to improve the site by the end of the week is to add more functionality. Right now it looks good but we don't have too much functionality.
+> One technical challenge that is keeping me from moving forward is CSS. It is very time consuming.
+> 1 way I am supporting my team is helping them with any questions or problems they are having while working.
