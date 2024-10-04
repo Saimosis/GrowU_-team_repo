@@ -11,7 +11,7 @@
       <div class="col"></div>
       <div class="col" id="form-col">
         <h1 class="lexend">Log In</h1>
-        <form id="create-form">
+        <form action="/log-in" method="POST" id="create-form">
           <div class="input-wrapper">
             <div class="item-wrapper">
               <label class="lexend" for="username-input">Username:</label>
@@ -64,7 +64,7 @@
       loginDiv.addEventListener("click", (e) => {
         window.location.href = "/signup";
       })
-            try {
+      try {
             const response = await fetch('/log-in'
             );
             if (!response.ok) {
@@ -75,6 +75,11 @@
             // if (data.reload) {
             //     window.location.reload();
             // }
+            if (data.user) {
+        window.location.href = "/";
+        sessionStorage.setItem("loggedIn", true);
+
+            }
           } catch (error) {
             console.error("there was a problem, skill issue" + error.message + "GG bro. Keep mogging.");
           }
