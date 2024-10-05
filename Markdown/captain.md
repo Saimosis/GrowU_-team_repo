@@ -13,3 +13,6 @@ journal entry 10/3/2024
 2. I hope to improve my webite's design by the end of the week.
 3. I'm having trouble getting a wrapper to fit the entire About Page (on the vertical spectrum).
 4. I can support my team by providing an organizational lead AND design help.
+
+journal entry 10/4/2025
+Today I continued working on the About page's design. I had to research some old elements of CSS like pseudocode and filters.
