@@ -64,7 +64,9 @@
       let loginDiv = document.getElementById("login-div");
       loginDiv.addEventListener("click", (e) => {
         window.location.href = "/login";
-      })
+      });
+      console.log(sessionStorage.getItem("loggedIn"));
+
     </script>
   </body>
 </html>

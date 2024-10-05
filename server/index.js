@@ -17,11 +17,23 @@ app.use(express.static(serverPublic)); // Serve static files from client directo
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 app.use(express.json()); // Parse JSON bodies
 
-let loggedIn = false;
-
 // Routes
 
 // Home Route
+
+app.get('/users', async (req, res) => {
+    try {
+        const data = await fs.readFile(dataPath, 'utf8');
+
+        const users = JSON.parse(data);
+        if (!users) {
+            throw new Error("Error no users available");
+        }
+        res.status(200).json(users);
+    } catch (error) {
+        console.error("Problem getting users" + error.message);
+        res.status(500).json({ error: "Problem reading users" });
+})
 
 app.get('/', (req, res) => {
     res.sendFile('index.html', { root: clientPath });
@@ -75,8 +87,7 @@ app.post('/submit-form', async (req, res) => {
 
 })
 
-
-app.post('/log-in', async (req, res) => {
+app.get('/log-in', async (req, res) => {
     try {
         const { username, email, password } = req.body;
         // read existing users from file
@@ -94,9 +105,7 @@ app.post('/log-in', async (req, res) => {
         if (user) {
             // res.status(409).json({ message: 'This user already exist', user: true })
             // allow user access to the website
-            loggedIn = true;
-            console.log(loggedIn);
-            // res.status(200).json({ message: 'Successfully logged in', user: true })
+            res.status(200).json({ message: 'Successfully logged in', user: true });
         } else {
             user = { username, email, password };
             // users.push(user);
@@ -104,7 +113,7 @@ app.post('/log-in', async (req, res) => {
 
         // save updated users
         // await fs.writeFile(dataPath, JSON.stringify(users, null, 2));
-        // res.redirect('/signup');
+        res.redirect('/login');
     } catch (error) {
         console.error('Error processing form:', error);
         res.status(500).send('An error occurred while processing your submission.');
