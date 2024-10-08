@@ -45,7 +45,7 @@
             </div>
             <div class="item-wrapper">
               <div class="submit-wrapper">
-                <button type="submit" class="submit lexend">Submit</button>
+                <button id="submit-login" type="submit" class="submit lexend">Submit</button>
               </div>
             </div>
             <hr />
@@ -65,10 +65,24 @@
       loginDiv.addEventListener("click", (e) => {
         window.location.href = "/signup";
       });
+
+      // document
+      //   .getElementById("submit-login")
+      //   .addEventListener("submit", async (e) => {
+      //     e.preventDefault();
+      //     try {
+      //        const response = await fetch("/log-in");
+      //        if (response.status == 409) {
+      //         console.log("409");
+      //        }
+      //     } catch (error) {
+
+      //     }
+      //   });
+
       document.addEventListener("DOMContentLoaded", async (e) => {
           e.preventDefault();
           const id = sessionStorage.getItem("userId");
-
       });
       // try {
       //       const response = await fetch('/log-in');
@@ -107,7 +121,6 @@
           console.error(error);
         }
       }
-
 
     </script>
   </body>

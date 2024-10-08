@@ -34,7 +34,11 @@ app.get('/users', async (req, res) => {
         console.error("Problem getting users" + error.message);
         res.status(500).json({ error: "Problem reading users" });
     }
+<<<<<<< HEAD
 })
+=======
+});
+>>>>>>> 5de6733b1ba3c54ff5e3738de542c0e25df8b2d6
 
 app.get('/', (req, res) => {
     res.sendFile('index.html', { root: clientPath });
@@ -74,7 +78,8 @@ app.post('/submit-form', async (req, res) => {
         if (user) {
             res.status(409).json({ message: 'This user already exist', user: true })
         } else {
-            user = { username, email, password };
+            let id = Math.floor(Math.random() * 999);
+            user = { id, username, email, password };
             users.push(user);
         }
 
@@ -108,13 +113,15 @@ app.get('/log-in', async (req, res) => {
             // allow user access to the website
             res.status(200).json({ message: 'Successfully logged in', user: true });
         } else {
-            user = { username, email, password };
+            // user = { username, email, password };
             // users.push(user);
+            // res.status(409).json({message: "", user: true})
+            res.redirect('about')
         }
 
         // save updated users
         // await fs.writeFile(dataPath, JSON.stringify(users, null, 2));
-        res.redirect('/login');
+        // res.redirect('/login');
     } catch (error) {
         console.error('Error processing form:', error);
         res.status(500).send('An error occurred while processing your submission.');
