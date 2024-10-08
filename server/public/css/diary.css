@@ -1,0 +1,31 @@
+body {
+    background-image: url('');
+    background-image: url("/assets/WomanInDesert.png");
+    background-size: cover;
+}
+
+#header {
+    border: 3px solid pink;
+    width: 50%;
+    background-color: white;
+    margin:auto;
+    text-align: center;
+    font-size: 3rem;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    color: #2596be;
+}
+
+#diary-form {
+    border: 3px solid pink;
+    margin-top: 5rem;
+    width: 50%;
+    margin: auto;
+    background-color: white;
+}
+#title-input { 
+    margin: auto;
+}
+#diary-input {
+    margin: auto;
+}
