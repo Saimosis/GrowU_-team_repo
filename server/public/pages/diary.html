@@ -20,13 +20,14 @@
           e.preventDefault();
           const title = document.getElementById("title-input").value;
           const diary = document.getElementById("diary-input").value;
+          const currentUser = localStorage.getItem("currentUser");
           try {
-            const response = await fetch("/diary-submit", {
+            const response = await fetch(`/diary-submit/${title}/${diary}/${currentUser}`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
               },
-              body: JSON.stringify({ title, diary }),
+              body: JSON.stringify({ title, diary, currentUser }),
             });
 
             if (!response.ok) {

@@ -57,6 +57,9 @@ app.get('/signup', (req, res) => {
 app.get('/login', (req, res) => {
     res.sendFile('pages/login.html', { root: serverPublic })
 })
+app.get('/exerciselog', (req, res) => {
+    res.sendFile('pages/exerciselog.html', { root: serverPublic })
+})
 
 // About Route
 
@@ -70,16 +73,17 @@ app.post('/sign-up', async (req, res) => {
     try {
         const { username, email, password } = req.body;
         // read existing users from file
-            const data = await fs.readFile(dataPath, 'utf8');
-            const users = JSON.parse(data)
-            // if file doesn't exist or is empty, start with an empty array
+        const data = await fs.readFile(dataPath, 'utf8');
+        const users = JSON.parse(data)
+        // if file doesn't exist or is empty, start with an empty array
         // find or create user
         let user = users.find(u => u.email === email && u.username === username && u.password === password)
         if (user) {
             res.status(409).json({ error: 'This user already exist' })
         } else {
             // let id = Math.floor(Math.random() * 999);
-            user = { username, email, password };
+
+            user = { username, email, password, diary: [], log: [] };
             users.push(user);
             res.status(200).json(user);
         }
@@ -87,6 +91,49 @@ app.post('/sign-up', async (req, res) => {
         // save updated users
         await fs.writeFile(dataPath, JSON.stringify(users, null, 2));
         // res.redirect('/login');
+    } catch (error) {
+        console.error('Error processing form:', error);
+        res.status(500).json({ error: 'An error occurred while processing your submission.' });
+    }
+})
+
+
+
+app.post('/diary-submit/:title/:diary/:currentUser', async (req, res) => {
+    try {
+        const { title, diary, currentUser } = req.body;
+        // read existing users from file
+        const data = await fs.readFile(dataPath, 'utf8');
+        if (data) {
+            let users = JSON.parse(data);
+            const userIndex = users.findIndex(user => user.username === currentUser.username && user.email === currentUser.email);
+            console.log(userIndex)
+            console.log(currentUser)
+            if (userIndex === -1) {
+                return res.status(404).json({ message: " User not found" });
+            }
+            console.log(' current user is ' + currentUser.name);
+
+            let entry = { "title": title, "diary": diary };
+            users[userIndex].diary.push(entry) 
+            console.log(users)
+            await fs.writeFile(dataPath, JSON.stringify(users, null, 2));
+p
+
+
+
+            // if (user) {
+            //     res.status(409).json({ error: 'This user already exist' })
+            // } else {
+            //     user = { username, email, password };
+            //     users.push(user);
+            //     res.status(200).json(user);
+            // }
+
+            // save updated users
+            // await fs.writeFile(dataPath, JSON.stringify(users, null, 2));
+            // res.redirect('/login');
+        }
     } catch (error) {
         console.error('Error processing form:', error);
         res.status(500).json({ error: 'An error occurred while processing your submission.' });

@@ -48,5 +48,12 @@
     "username": "aaaaa",
     "email": "aaaaaa@aaa.com",
     "password": "aa"
+  },
+  {
+    "username": "leo",
+    "email": "leo@leo.com",
+    "password": "leo",
+    "diary": [],
+    "log": []
   }
 ]
