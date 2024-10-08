@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/exerciselog.css" />
+</head>
+
+<body>
+
+    <div id="header">
+        Exercise Log
+    </div>
+
+    <form id="reps-form">
+    <input name="reps-type" id="reps-type-input" type="text">
+    <input name="reps" id="reps-input" type="number">
+    <button type="submit">Submit</button>
+    </form>
+
+    <form id="duration-form">
+    <input name="duration-type" id="duration-type-input" type="text">
+    <input name="duration" id="duration-input" type="number">
+    <button type="submit">Submit</button>
+    </form>
+
+
+
+   <script>
+
+      document
+        .getElementById("duration-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const dType = document.getElementById("duration-type-input").value;
+          const duration = document.getElementById("duration-input").value;
+          try {
+            const response = await fetch("/diary-submit", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ dType, duration }),
+            });
+
+            if (!response.ok) {
+              throw new Error("Error");
+            }
+
+            const user = await response.json();
+
+            localStorage.setItem("currentUser", JSON.stringify(user));
+            console.log(localStorage.getItem("currentUser"));
+            window.location.href = "/profile";
+          } catch (error) {
+            alert("Exercie Entry Failed: " + error.message);
+          }
+        });
+
+        
+          document
+        .getElementById("reps-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const rType = document.getElementById("reps-type-input").value;
+          const reps = document.getElementById("reps-input").value;
+          try {
+            const response = await fetch("/diary-submit", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ rType, reps }),
+            });
+
+            if (!response.ok) {
+              throw new Error("Error");
+            }
+
+            const user = await response.json();
+
+            localStorage.setItem("currentUser", JSON.stringify(user));
+            console.log(localStorage.getItem("currentUser"));
+            window.location.href = "/profile";
+          } catch (error) {
+            alert("Exercise Entry Failed: " + error.message);
+          }
+        });
+   </script> 
+
+</body>
+</html>
