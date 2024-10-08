@@ -40,3 +40,14 @@ One techincal challenge is probably just remembering basic css.
 
 ## What is 1 way you can support your team better moving forward?
 I'd like to contribute more by doing more css and making the nav bar, and footer.
+
+# DAY 4 10/7/2024
+
+## What is one idea/topic that you had to revist from last year while building your project?
+One idea was the animation testing from last year, and flex display things that I need to use for the project.
+
+## What is one real world reference website that you have used to inspire your work on this project?
+I used w3 schools and dribble to use some of the refrences.
+
+## Have you considered how users with sight disablilites might view your sight?
+I'm not sure, I haven't really considered it but I will now that it is mentioned.

@@ -16,3 +16,9 @@
 > One way I hope to improve the site by the end of the week is to add more functionality. Right now it looks good but we don't have too much functionality.
 > One technical challenge that is keeping me from moving forward is CSS. It is very time consuming.
 > 1 way I am supporting my team is helping them with any questions or problems they are having while working.
+
+# 10/7/2024
+
+> One idea/topic I had to revisit from last year was localStorage when building our project.
+> One real world reference website we have used to inspire our work is EOS Fitness
+> We have not considered how users with sight disabilities might view our site. We might have to change some font sizes/color choices.

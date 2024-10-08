@@ -11,18 +11,8 @@
       <div class="col"></div>
       <div class="col" id="form-col">
         <h1 class="lexend">Log In</h1>
-        <form action="/log-in" method="POST" id="create-form">
+        <form id="create-form">
           <div class="input-wrapper">
-            <div class="item-wrapper">
-              <label class="lexend" for="username-input">Username:</label>
-              <input
-                class="lexend"
-                name="username"
-                id="username-input"
-                type="text"
-                required
-              />
-            </div>
             <div class="item-wrapper">
               <label class="lexend" for="email-input">Email:</label>
               <input
@@ -45,7 +35,9 @@
             </div>
             <div class="item-wrapper">
               <div class="submit-wrapper">
-                <button type="submit" class="submit lexend">Submit</button>
+                <button id="submit-login" type="submit" class="submit lexend">
+                  Submit
+                </button>
               </div>
             </div>
             <hr />
@@ -60,10 +52,83 @@
       </div>
     </div>
     <script>
+      console.log(sessionStorage.getItem("loggedIn"));
       let loginDiv = document.getElementById("login-div");
       loginDiv.addEventListener("click", (e) => {
         window.location.href = "/signup";
-      })
-        </script>
+      });
+
+      document
+        .getElementById("create-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const email = document.getElementById("email-input").value;
+          const password = document.getElementById("password-input").value;
+          try {
+            const response = await fetch(`/log-in/${email}/${password}`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ email, password }),
+            });
+
+            if (!response.ok) {
+              throw new Error("User not found");
+            }
+
+            const user = await response.json();
+
+            localStorage.setItem("currentUser", JSON.stringify(user));
+            localStorage.setItem("loggedIn", true);
+            console.log(localStorage.getItem("currentUser"));
+            window.location.href = "/";
+          } catch (error) {
+            alert("Sign-In Failed: " + error.message);
+          }
+        });
+
+      document.addEventListener("DOMContentLoaded", async (e) => {
+        e.preventDefault();
+        // const id = sessionStorage.getItem("userId");
+      });
+      // try {
+      //       const response = await fetch('/log-in');
+      //       if (!response.ok) {
+      //          throw new Error("Problem fetching delete endpoint");
+      //       }
+      //       const data = await response.json();
+      //       // console.log(data);
+      //       // if (data.reload) {
+      //       //     window.location.reload();
+      //       // }
+      //       if (data.user) {
+      //   window.location.href = "/";
+      //   sessionStorage.setItem("loggedIn", true);
+
+      //       }
+      //     } catch (error) {
+      //       console.error("there was a problem, skill issue" + error.message + "GG bro. Keep mogging.");
+      //     }
+      //   });
+
+      async function fetchUsers() {
+        try {
+          const response = await fetch("/users");
+          if (!response.ok) {
+            throw new Error("Error fetching users. Response not ok");
+          }
+          // there could be an error getting response/fetching the endpoint
+          // console.log(response);
+          const users = await response.json();
+          // there could be an error parsing the response
+          // console.log(users);
+          return users;
+        } catch (error) {
+          console.error("There was a problem");
+          console.error(error);
+        }
+      }
+    </script>
   </body>
 </html>

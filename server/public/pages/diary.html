@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="diary-form">
+
+    <input name="title" id="title-input" type="text">
+    <textarea name="diary" id="diary-input" cols="30" rows="10"></textarea>
+    <button type="submit">Submit</button>
+    </form>
+   <script>
+
+      document
+        .getElementById("diary-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const title = document.getElementById("title-input").value;
+          const diary = document.getElementById("diary-input").value;
+          try {
+            const response = await fetch("/diary-submit", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ title, diary }),
+            });
+
+            if (!response.ok) {
+              throw new Error("Error");
+            }
+
+            const user = await response.json();
+
+            localStorage.setItem("currentUser", JSON.stringify(user));
+            console.log(localStorage.getItem("currentUser"));
+            window.location.href = "/profile";
+          } catch (error) {
+            alert("Diary Entry Failed: " + error.message);
+          }
+        });
+
+   </script> 
+</body>
+</html>
