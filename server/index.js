@@ -40,7 +40,17 @@ app.get('/', (req, res) => {
     res.sendFile('index.html', { root: clientPath });
 })
 
-// Sign up and Login Route
+
+app.get('/profile', (req, res) => {
+    res.sendFile('profile.html', { root: clientPath });
+})
+
+
+app.get('/diary', (req, res) => {
+    res.sendFile('diary.html', { root: clientPath });
+})
+
+// indexgn up and Login Route
 app.get('/signup', (req, res) => {
     res.sendFile('pages/signup.html', { root: serverPublic })
 })
