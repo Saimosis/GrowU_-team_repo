@@ -2,7 +2,7 @@ body {
     background-color: #12323a;
     /* min-height:100vh */
     /* background-image: url("/assets/borderAboutPage.png"); */
-    background-image: url("/assets/dumbell.png");
+    background-image: url("/assets/gymbackground.png");
     background-size: cover;
 }
 
@@ -15,7 +15,6 @@ body {
     border-radius: 1rem; 
     min-height: 100vh;
 }
-
 #header {
     text-align: center;
     color: black;
@@ -24,11 +23,15 @@ body {
     border: 4px solid pink;
     border-radius: 1rem;
     background-color: white;
+    box-shadow: 5px 5px 5px black;
+    
 }
-#page-text p {
+#wrapper #header {
     position: relative;
     z-index: 100;
 }
+
+
 #page-text {
     position: relative;
     /* display: block; */
@@ -39,9 +42,16 @@ body {
     font-size: 2rem;
     padding: 3rem;
     font-family: "Chicle";
-    background-image: url("/assets/dumbell.png");
     background-size: cover;
-    background-position: center;
+    background-position: center; */
+}
+#page-text p {
+    position: relative;
+    z-index: 100;
+    color: black;
+    /* text-shadow: 10px 5px 5px black; */
+    /* -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: pink; */
 }
 #page-text::before {
     position: absolute;
@@ -50,7 +60,8 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-    background-color: rgba(256, 256, 256, 0.3);
+    background-color: rgba(256, 256, 256, 0.7);
     z-index: 1; 
     pointer-events: none;
+    border-radius: 10px;
 }

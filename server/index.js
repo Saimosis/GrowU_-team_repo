@@ -33,6 +33,7 @@ app.get('/users', async (req, res) => {
     } catch (error) {
         console.error("Problem getting users" + error.message);
         res.status(500).json({ error: "Problem reading users" });
+    }
 })
 
 app.get('/', (req, res) => {
