@@ -42,7 +42,7 @@ app.get('/', (req, res) => {
 
 // Sign up and Login Route
 app.get('/signup', (req, res) => {
-    res.sendFile('pages/signup.html', { root: serverPublic})
+    res.sendFile('pages/signup.html', { root: serverPublic })
 })
 app.get('/login', (req, res) => {
     res.sendFile('pages/login.html', { root: serverPublic })
@@ -56,71 +56,70 @@ app.get('/about', (req, res) => {
 
 // Retrieve Data from signup and store it
 
-app.post('/submit-form', async (req, res) => {
+app.post('/sign-up', async (req, res) => {
     try {
         const { username, email, password } = req.body;
         // read existing users from file
-        let users = []
-        try {
             const data = await fs.readFile(dataPath, 'utf8');
-            users = JSON.parse(data)
-        } catch (error) {
+            const users = JSON.parse(data)
             // if file doesn't exist or is empty, start with an empty array
-            console.error('Error reading user data', error);
-            users = []
-        }
         // find or create user
         let user = users.find(u => u.email === email && u.username === username && u.password === password)
         if (user) {
-            res.status(409).json({ message: 'This user already exist', user: true })
+            res.status(409).json({ error: 'This user already exist' })
         } else {
-            let id = Math.floor(Math.random() * 999);
-            user = { id, username, email, password };
+            // let id = Math.floor(Math.random() * 999);
+            user = { username, email, password };
             users.push(user);
+            res.status(200).json(user);
         }
 
         // save updated users
         await fs.writeFile(dataPath, JSON.stringify(users, null, 2));
-        res.redirect('/signup');
-    } catch (error) {
-        console.error('Error processing form:', error);
-        res.status(500).send('An error occurred while processing your submission.');
-    }
-
-})
-
-app.get('/log-in', async (req, res) => {
-    try {
-        const { username, email, password } = req.body;
-        // read existing users from file
-        let users = []
-        try {
-            const data = await fs.readFile(dataPath, 'utf8');
-            users = JSON.parse(data)
-        } catch (error) {
-            // if file doesn't exist or is empty, start with an empty array
-            console.error('Error reading user data', error);
-            users = []
-        }
-        // find or create user
-        let user = users.find(u => u.email === email && u.username === username && u.password === password)
-        if (user) {
-            // res.status(409).json({ message: 'This user already exist', user: true })
-            // allow user access to the website
-            res.status(200).json({ message: 'Successfully logged in', user: true });
-        } else {
-            // user = { username, email, password };
-            // users.push(user);
-            // res.status(409).json({message: "", user: true})
-            res.redirect('about')
-        }
-
-        // save updated users
-        // await fs.writeFile(dataPath, JSON.stringify(users, null, 2));
         // res.redirect('/login');
     } catch (error) {
         console.error('Error processing form:', error);
-        res.status(500).send('An error occurred while processing your submission.');
+        res.status(500).json({ error: 'An error occurred while processing your submission.' });
+    }
+
+
+    // try {
+    //     const { email, password } = req.body;
+    //     // read existing users from file
+    //     const data = await fs.readFile(dataPath, 'utf8');
+    //     const users = JSON.parse(data)
+
+    //     const user = users.find(u => u.password === password && u.email === email);
+
+    //     if (user) {
+    //         res.status(200).json(user)
+    //     } else {
+    //         res.status(404).json({ error: 'User not found' });
+    //     }
+    // } catch (error) {
+    //     console.error('Error during sign-in:', error);
+    //     res.status(500).json({ error: 'Internal server error' });
+    // }
+
+})
+
+app.post('/log-in/:email/:password', async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        // read existing users from file
+        const data = await fs.readFile(dataPath, 'utf8');
+        const users = JSON.parse(data)
+
+        const user = users.find(u => u.password === password && u.email === email);
+
+        if (user) {
+            res.status(200).json(user)
+        } else {
+            res.status(404).json({ error: 'User not found' });
+        }
+    } catch (error) {
+        console.error('Error during sign-in:', error);
+        res.status(500).json({ error: 'Internal server error' });
     }
 
 })

@@ -11,18 +11,8 @@
       <div class="col"></div>
       <div class="col" id="form-col">
         <h1 class="lexend">Log In</h1>
-        <form action="/log-in" id="create-form">
+        <form id="create-form">
           <div class="input-wrapper">
-            <div class="item-wrapper">
-              <label class="lexend" for="username-input">Username:</label>
-              <input
-                class="lexend"
-                name="username"
-                id="username-input"
-                type="text"
-                required
-              />
-            </div>
             <div class="item-wrapper">
               <label class="lexend" for="email-input">Email:</label>
               <input
@@ -45,7 +35,9 @@
             </div>
             <div class="item-wrapper">
               <div class="submit-wrapper">
-                <button id="submit-login" type="submit" class="submit lexend">Submit</button>
+                <button id="submit-login" type="submit" class="submit lexend">
+                  Submit
+                </button>
               </div>
             </div>
             <hr />
@@ -66,23 +58,39 @@
         window.location.href = "/signup";
       });
 
-      // document
-      //   .getElementById("submit-login")
-      //   .addEventListener("submit", async (e) => {
-      //     e.preventDefault();
-      //     try {
-      //        const response = await fetch("/log-in");
-      //        if (response.status == 409) {
-      //         console.log("409");
-      //        }
-      //     } catch (error) {
+      document
+        .getElementById("create-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const email = document.getElementById("email-input").value;
+          const password = document.getElementById("password-input").value;
+          try {
+            const response = await fetch(`/log-in/${email}/${password}`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ email, password }),
+            });
 
-      //     }
-      //   });
+            if (!response.ok) {
+              throw new Error("User not found");
+            }
+
+            const user = await response.json();
+
+            localStorage.setItem("currentUser", JSON.stringify(user));
+            localStorage.setItem("loggedIn", true);
+            console.log(localStorage.getItem("currentUser"));
+            window.location.href = "/";
+          } catch (error) {
+            alert("Sign-In Failed: " + error.message);
+          }
+        });
 
       document.addEventListener("DOMContentLoaded", async (e) => {
-          e.preventDefault();
-          const id = sessionStorage.getItem("userId");
+        e.preventDefault();
+        // const id = sessionStorage.getItem("userId");
       });
       // try {
       //       const response = await fetch('/log-in');
@@ -121,7 +129,6 @@
           console.error(error);
         }
       }
-
     </script>
   </body>
 </html>

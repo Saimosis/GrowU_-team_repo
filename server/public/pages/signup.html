@@ -12,7 +12,7 @@
       <div class="col"></div>
       <div class="col" id="form-col">
         <h1 class="lexend bold">Sign Up</h1>
-        <form action="/submit-form" method="POST" id="create-form">
+        <form id="create-form">
           <div class="input-wrapper">
             <div class="item-wrapper">
               <label class="lexend" for="username-input">Username:</label>
@@ -65,7 +65,38 @@
       loginDiv.addEventListener("click", (e) => {
         window.location.href = "/login";
       });
-      console.log(sessionStorage.getItem("loggedIn"));
+      // console.log(sessionStorage.getItem("loggedIn"));
+
+
+      document
+        .getElementById("create-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const email = document.getElementById("email-input").value;
+          const username = document.getElementById("username-input").value;
+          const password = document.getElementById("password-input").value;
+          try {
+            const response = await fetch("/sign-up", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ username, email, password }),
+            });
+
+            if (!response.ok) {
+              throw new Error("User already exists");
+            }
+
+            const user = await response.json();
+
+            // localStorage.setItem("currentUser", JSON.stringify(user));
+            // console.log(localStorage.getItem("currentUser"));
+            window.location.href = "/login";
+          } catch (error) {
+            alert("Sign-Up Failed: " + error.message);
+          }
+        });
 
     </script>
   </body>
