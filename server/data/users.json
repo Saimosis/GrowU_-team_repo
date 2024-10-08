@@ -28,5 +28,25 @@
     "username": "b",
     "email": "b@b.com",
     "password": "b"
+  },
+  {
+    "username": "aaaaaaa",
+    "email": "aaaaaaaa@aaaaaa.com",
+    "password": "aaaaaaaaaaaa"
+  },
+  {
+    "username": "aaa",
+    "email": "aaa@aaa.com",
+    "password": "aaa"
+  },
+  {
+    "username": "bob",
+    "email": "bob@bob.com",
+    "password": "bob"
+  },
+  {
+    "username": "aaaaa",
+    "email": "aaaaaa@aaa.com",
+    "password": "aa"
   }
 ]
