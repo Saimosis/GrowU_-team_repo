@@ -16,3 +16,8 @@ journal entry 10/3/2024
 
 journal entry 10/4/2025
 Today I continued working on the About page's design. I had to research some old elements of CSS like pseudocode and filters.
+
+journal entry 10/7/2024
+1. I had to revisit text and box shadows.
+2. I referenced the EOS Fitness website because it has a really nice design setup for fitnes goal.
+3. I haven't considered user with sight disabilities but I don't think I need to recalibrate my font sizes/colors.
