@@ -38,12 +38,17 @@ justify-content: start;
 }
 
 .signInLogIn {
+  display: flex;
   justify-content: flex-end;
+  align-items: flex-end;
   flex: 1;
   background-color: red;
 }
 
+
+
 .signInLogIn button {
  border: none;
- 
+
+ background-color: rgb(221, 221, 255);
 }
