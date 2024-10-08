@@ -42,12 +42,12 @@ app.get('/', (req, res) => {
 
 
 app.get('/profile', (req, res) => {
-    res.sendFile('profile.html', { root: clientPath });
+    res.sendFile('pages/profile.html', { root: serverPublic });
 })
 
 
 app.get('/diary', (req, res) => {
-    res.sendFile('diary.html', { root: clientPath });
+    res.sendFile('pages/diary.html', { root: serverPublic });
 })
 
 // indexgn up and Login Route
