@@ -34,11 +34,7 @@ app.get('/users', async (req, res) => {
         console.error("Problem getting users" + error.message);
         res.status(500).json({ error: "Problem reading users" });
     }
-<<<<<<< HEAD
-})
-=======
 });
->>>>>>> 5de6733b1ba3c54ff5e3738de542c0e25df8b2d6
 
 app.get('/', (req, res) => {
     res.sendFile('index.html', { root: clientPath });
