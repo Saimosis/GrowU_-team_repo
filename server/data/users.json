@@ -1,52 +1,33 @@
 [
   {
-    "username": "coolguy24",
-    "email": "coolguy24@gmail.com",
-    "password": "thisguyiscool24"
-  },
-  {
-    "username": "Saimosis",
-    "email": "poo@poop.com",
-    "password": "poop24popp"
-  },
-  {
-    "username": "guy",
-    "email": "guy@guy.com",
-    "password": "guy"
-  },
-  {
-    "username": "aa",
-    "email": "a@a.com",
-    "password": "a"
-  },
-  {
     "username": "a",
     "email": "a@a.com",
-    "password": "a"
-  },
-  {
-    "username": "b",
-    "email": "b@b.com",
-    "password": "b"
-  },
-  {
-    "username": "aaaaaaa",
-    "email": "aaaaaaaa@aaaaaa.com",
-    "password": "aaaaaaaaaaaa"
-  },
-  {
-    "username": "aaa",
-    "email": "aaa@aaa.com",
-    "password": "aaa"
-  },
-  {
-    "username": "bob",
-    "email": "bob@bob.com",
-    "password": "bob"
-  },
-  {
-    "username": "aaaaa",
-    "email": "aaaaaa@aaa.com",
-    "password": "aa"
+    "password": "a",
+    "diary": [
+      {
+        "title": "dsfasdf",
+        "date": "10/9/2024",
+        "diary": "dsfdsaf"
+      }
+    ],
+    "runs": [
+      {
+        "Exercise Type": "dsf",
+        "date": "10/9/2024",
+        "duration": "3"
+      }
+    ],
+    "exercises": [
+      {
+        "Exercise Type": "dasfdsf",
+        "date": "10/9/2024",
+        "reps": "4"
+      },
+      {
+        "Exercise Type": "adsfasdf",
+        "date": "10/9/2024",
+        "reps": "-3"
+      }
+    ]
   }
 ]
