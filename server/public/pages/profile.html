@@ -39,11 +39,11 @@
       </tbody>
     </table>
     <div id="edit-form"></div>
-    <h1>Exercie Logs</h1>
+    <h1>Exercise Logs</h1>
     <table id="exerciseTable">
       <thead>
         <tr>
-          <th>Exercie Type</th>
+          <th>Exercise Type</th>
           <th>Date</th>
           <th>Reps</th>
         </tr>
@@ -52,6 +52,7 @@
         <!-- data of users will be rendered here -->
       </tbody>
     </table>
+    <div id="exercise-edit-form"></div>
     <button id="log-out-button">Log Out</button>
     <script>
       if (localStorage.getItem("loggedIn") === "false") {
@@ -132,6 +133,113 @@
               } else if (e.target.classList.contains("edit-button")) {
                 const index = event.target.getAttribute("edit-index");
                 const entry = currentUser.runs[index]; // Get entry by index
+                e.target.classList.add("hidden");
+                console.log(e.target);
+                let newCell = document.createElement("div");
+                let newTypeInput = document.createElement("input");
+                newTypeInput.id = "newType";
+                let newTypeHeader = document.createElement("h1");
+                newTypeHeader.innerHTML = "New Type";
+                newCell.appendChild(newTypeHeader);
+                newCell.appendChild(newTypeInput);
+                let newDurationInput = document.createElement("input");
+                newDurationInput.id = "newDuration";
+                let newDurationHeader = document.createElement("h1");
+                newDurationHeader.innerHTML = "New Duration";
+                newCell.appendChild(newDurationHeader);
+                newCell.appendChild(newDurationInput);
+                let newSubmit = document.createElement("button");
+                newSubmit.innerHTML = "Submit";
+                newCell.appendChild(newSubmit);
+                document.getElementById("edit-form").appendChild(newCell);
+                newSubmit.addEventListener("click", async () => {
+                  try {
+                    const newType = document.getElementById("newType").value;
+                    const newDuration =
+                      document.getElementById("newDuration").value;
+                    let newEntry = {
+                      type: newType,
+                      duration: newDuration,
+                    };
+                    console.log(entry, currentUser);
+                    const response = await fetch("/run-edit", {
+                      method: "PUT",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify({
+                        entry,
+                        newEntry,
+                        currentUser,
+                      }),
+                    });
+                    if (!response.ok) {
+                      throw new Error("Problem fetching delete endpoint");
+                    }
+                    const data = await response.json();
+                    renderRuns();
+                    if (data.reload) {
+                      window.location.reload();
+                    }
+                    let user = data.user;
+                    localStorage.setItem("currentUser", JSON.stringify(user));
+                  } catch (error) {
+                    console.error("Error deleting run entry:", error);
+                  }
+                });
+              }
+              renderRuns();
+              if (data.reload) {
+                window.location.reload();
+              }
+            });
+          } catch (error) {}
+        }
+        document.addEventListener("DOMContentLoaded", renderRuns);
+
+
+        async function renderExercises() {
+          const tableBody = document.getElementById("exerciseTableBody");
+          tableBody.innerHTML = "";
+          try {
+            let index = 0;
+            currentUser.exercises.forEach((entry) => {
+              const row = `<tr id="row-${index}"><td>${entry.type}</td><td>${entry.date}</td><td>${entry.reps} min</td><td><button data-index="${index}" class="delete-button">X</button></td><button edit-index="${index}" class="edit-button">Edit</button></td></tr>`;
+              index++;
+              tableBody.innerHTML += row;
+            });
+            tableBody.addEventListener("click", async (e) => {
+              if (e.target.classList.contains("delete-button")) {
+                const index = event.target.getAttribute("data-index");
+                const entry = currentUser.runs[index]; // Get entry by index
+                try {
+                  console.log(entry, currentUser);
+                  const response = await fetch("/run-delete", {
+                    method: "DELETE",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                      entry,
+                      currentUser,
+                    }),
+                  });
+                  if (!response.ok) {
+                    throw new Error("Problem fetching delete endpoint");
+                  }
+                  const data = await response.json();
+                  renderRuns();
+                  if (data.reload) {
+                    window.location.reload();
+                  }
+                  let user = data.user;
+                  localStorage.setItem("currentUser", JSON.stringify(user));
+                } catch (error) {
+                  console.error("Error deleting run entry:", error);
+                }
+              } else if (e.target.classList.contains("edit-button")) {
+                const index = event.target.getAttribute("edit-index");
+                const entry = currentUser.exercises[index]; // Get entry by index
                 e.target.classList.add("hidden");
                 console.log(e.target);
                 let newCell = document.createElement("div");
