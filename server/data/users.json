@@ -53,7 +53,40 @@
     "username": "leo",
     "email": "leo@leo.com",
     "password": "leo",
-    "diary": [],
+    "diary": [
+      {
+        "title": "aa",
+        "diary": "aa"
+      },
+      {
+        "title": "aa",
+        "date": "10/8/2024",
+        "diary": "aaaa"
+      }
+    ],
+    "log": []
+  },
+  {
+    "username": "aa",
+    "email": "aa@aa.com",
+    "password": "aa",
+    "diary": [
+      {
+        "title": "bb",
+        "date": "10/8/2024",
+        "diary": "bbb"
+      },
+      {
+        "title": "aaa",
+        "date": "10/8/2024",
+        "diary": "aaa"
+      },
+      {
+        "title": "hi",
+        "date": "10/8/2024",
+        "diary": "hi"
+      }
+    ],
     "log": []
   }
 ]

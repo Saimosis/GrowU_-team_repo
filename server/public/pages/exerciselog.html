@@ -1,34 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="/css/exerciselog.css" />
-</head>
+  </head>
 
-<body>
-
-    <div id="header">
-        Exercise Log
-    </div>
+  <body>
+    <div id="header">Exercise Log</div>
 
     <form id="reps-form">
-    <input name="reps-type" id="reps-type-input" type="text">
-    <input name="reps" id="reps-input" type="number">
-    <button type="submit">Submit</button>
+      <input name="reps-type" id="reps-type-input" type="text" />
+      <input name="reps" id="reps-input" type="number" />
+      <button type="submit">Submit</button>
     </form>
 
     <form id="duration-form">
-    <input name="duration-type" id="duration-type-input" type="text">
-    <input name="duration" id="duration-input" type="number">
-    <button type="submit">Submit</button>
+      <input name="duration-type" id="duration-type-input" type="text" />
+      <input name="duration" id="duration-input" type="number" />
+      <button type="submit">Submit</button>
     </form>
 
-
-
-   <script>
-
+    <script>
+      const currentUser = localStorage.getItem("currentUser");
       document
         .getElementById("duration-form")
         .addEventListener("submit", async (e) => {
@@ -36,16 +31,16 @@
           const dType = document.getElementById("duration-type-input").value;
           const duration = document.getElementById("duration-input").value;
           try {
-            const response = await fetch("/diary-submit", {
+            const response = await fetch(`/d-exercise-submit/${dType}/${duration}/${currentUser}/`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
               },
-              body: JSON.stringify({ dType, duration }),
+              body: JSON.stringify({ dType, duration, currentUser }),
             });
 
             if (!response.ok) {
-              throw new Error("Error");
+              throw new Error("response no good");
             }
 
             const user = await response.json();
@@ -58,20 +53,19 @@
           }
         });
 
-        
-          document
+      document
         .getElementById("reps-form")
         .addEventListener("submit", async (e) => {
           e.preventDefault();
           const rType = document.getElementById("reps-type-input").value;
           const reps = document.getElementById("reps-input").value;
           try {
-            const response = await fetch("/diary-submit", {
+            const response = await fetch(`/r-exercise-submit/${rType}/${reps}/${currentUser}`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
               },
-              body: JSON.stringify({ rType, reps }),
+              body: JSON.stringify({ rType, reps, currentUser }),
             });
 
             if (!response.ok) {
@@ -87,7 +81,6 @@
             alert("Exercise Entry Failed: " + error.message);
           }
         });
-   </script> 
-
-</body>
+    </script>
+  </body>
 </html>

@@ -99,65 +99,83 @@ app.post('/sign-up', async (req, res) => {
 
 
 
-app.post('/diary-submit/:title/:diary/:currentUser', async (req, res) => {
+
+app.post('/d-exercise-submit/:dType/:duration/:currentUser/', async (req, res) => {
     try {
-        const { title, diary, currentUser } = req.body;
+        let { dType, duration, currentUser } = req.body;
         // read existing users from file
         const data = await fs.readFile(dataPath, 'utf8');
         if (data) {
             let users = JSON.parse(data);
-            const userIndex = users.findIndex(user => user.username === currentUser.username && user.email === currentUser.email);
-            console.log(userIndex)
-            console.log(currentUser)
+            currentUser = JSON.parse(currentUser);
+            console.log(currentUser.username, currentUser.email);
+            let userIndex = users.findIndex(user => user.username === currentUser.username && user.email === currentUser.email);
+            console.log(userIndex);
+            console.log(currentUser);
+
             if (userIndex === -1) {
                 return res.status(404).json({ message: " User not found" });
             }
             console.log(' current user is ' + currentUser.name);
 
-            let entry = { "title": title, "diary": diary };
-            users[userIndex].diary.push(entry) 
-            console.log(users)
+            const date = new Date();
+            const year = date.getFullYear();
+            const month = date.getMonth() + 1;
+            const day = date.getDate();
+            // const fullDate = month + "/" + day + "/" + year;
+            const fullDate = `${month}/${day}/${year}`;
+
+            let eLog = { "Exercise Type": dType, "date":fullDate, "duration": duration };
+            users[userIndex].log.push(eLog);
+            console.log(users);
+            let user = users.find(user => user.username === currentUser.username && user.email === currentUser.email);
+            res.status(200).json(user);
             await fs.writeFile(dataPath, JSON.stringify(users, null, 2));
-p
-
-
-
-            // if (user) {
-            //     res.status(409).json({ error: 'This user already exist' })
-            // } else {
-            //     user = { username, email, password };
-            //     users.push(user);
-            //     res.status(200).json(user);
-            // }
-
-            // save updated users
-            // await fs.writeFile(dataPath, JSON.stringify(users, null, 2));
-            // res.redirect('/login');
         }
     } catch (error) {
         console.error('Error processing form:', error);
         res.status(500).json({ error: 'An error occurred while processing your submission.' });
     }
+})
 
 
-    // try {
-    //     const { email, password } = req.body;
-    //     // read existing users from file
-    //     const data = await fs.readFile(dataPath, 'utf8');
-    //     const users = JSON.parse(data)
 
-    //     const user = users.find(u => u.password === password && u.email === email);
+app.post('/diary-submit/:title/:diary/:currentUser', async (req, res) => {
+    try {
+        let { title, diary, currentUser } = req.body;
+        // read existing users from file
+        const data = await fs.readFile(dataPath, 'utf8');
+        if (data) {
+            let users = JSON.parse(data);
+            currentUser = JSON.parse(currentUser);
+            console.log(currentUser.username, currentUser.email);
+            let userIndex = users.findIndex(user => user.username === currentUser.username && user.email === currentUser.email);
+            console.log(userIndex);
+            console.log(currentUser);
 
-    //     if (user) {
-    //         res.status(200).json(user)
-    //     } else {
-    //         res.status(404).json({ error: 'User not found' });
-    //     }
-    // } catch (error) {
-    //     console.error('Error during sign-in:', error);
-    //     res.status(500).json({ error: 'Internal server error' });
-    // }
+            if (userIndex === -1) {
+                return res.status(404).json({ message: " User not found" });
+            }
+            console.log(' current user is ' + currentUser.name);
 
+            const date = new Date();
+            const year = date.getFullYear();
+            const month = date.getMonth() + 1;
+            const day = date.getDate();
+            // const fullDate = month + "/" + day + "/" + year;
+            const fullDate = `${month}/${day}/${year}`;
+
+            let entry = { "title": title, "date":fullDate, "diary": diary };
+            users[userIndex].diary.push(entry);
+            console.log(users);
+            let user = users.find(user => user.username === currentUser.username && user.email === currentUser.email);
+            res.status(200).json(user);
+            await fs.writeFile(dataPath, JSON.stringify(users, null, 2));
+        }
+    } catch (error) {
+        console.error('Error processing form:', error);
+        res.status(500).json({ error: 'An error occurred while processing your submission.' });
+    }
 })
 
 app.post('/log-in/:email/:password', async (req, res) => {

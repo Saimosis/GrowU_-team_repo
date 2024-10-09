@@ -1,11 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profile</title>
-</head>
-<body>
+  </head>
+  <body>
+    <h1 id="user-name"></h1>
+    <h1>Diary Entries</h1>
+    <table id="usersTable">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Date</th>
+          <th>Entry</th>
+        </tr>
+      </thead>
+      <tbody id="userTableBody">
+        <!-- data of users will be rendered here -->
+      </tbody>
+    </table>
+    <h1>Exercise Logs</h1>
+    <table id="exerciseTable">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Date</th>
+          <th>Entry</th>
+        </tr>
+      </thead>
+      <tbody id="exerciseTableBody">
+        <!-- data of users will be rendered here -->
+      </tbody>
+    </table>
     <button>Log Out</button>
-</body>
+    <script>
+      let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+      let userName = document.getElementById("user-name");
+      userName.innerHTML = currentUser.username;
+
+      async function fetchUsers() {
+        try {
+          const response = await fetch("/users");
+          if (!response.ok) {
+            throw new Error("Error fetching users. Response not ok");
+          }
+          // there could be an error getting response/fetching the endpoint
+          // console.log(response);
+          const users = await response.json();
+          // there could be an error parsing the response
+          // console.log(users);
+          return users;
+        } catch (error) {
+          console.error("There was a problem");
+          console.error(error);
+        }
+      }
+
+      async function renderUsers() {
+          console.log(currentUser.diary);
+        const tableBody = document.getElementById("userTableBody");
+        tableBody.innerHTML = "";
+        try {
+          currentUser.diary.forEach((entry) => {
+            console.log(entry);
+            const row = `<tr><td>${entry.title}</td><td>${entry.date}</td><td>${entry.diary}</td></tr>`;
+            tableBody.innerHTML += row;
+          });
+        } catch (error) {}
+      }
+      document.addEventListener("DOMContentLoaded", renderUsers);
+      async function renderExercises() {
+        const tableBody = document.getElementById("userTableBody");
+        tableBody.innerHTML = "";
+        try {
+          currentUser.diary.forEach((entry) => {
+            console.log(entry);
+            const row = `<tr><td>${entry.title}</td><td>${entry.date}</td><td>${entry.diary}</td></tr>`;
+            tableBody.innerHTML += row;
+          });
+        } catch (error) {}
+      }
+      document.addEventListener("DOMContentLoaded", renderUsers);
+    </script>
+  </body>
 </html>
