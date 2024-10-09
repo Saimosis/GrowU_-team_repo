@@ -249,12 +249,12 @@
                 newTypeHeader.innerHTML = "New Type";
                 newCell.appendChild(newTypeHeader);
                 newCell.appendChild(newTypeInput);
-                let newDurationInput = document.createElement("input");
-                newDurationInput.id = "newDuration";
-                let newDurationHeader = document.createElement("h1");
-                newDurationHeader.innerHTML = "New Duration";
-                newCell.appendChild(newDurationHeader);
-                newCell.appendChild(newDurationInput);
+                let newRepsInput = document.createElement("input");
+                newRepsInput.id = "newReps";
+                let newRepsHeader = document.createElement("h1");
+                newDurationHeader.innerHTML = "New Reps";
+                newCell.appendChild(newRepsHeader);
+                newCell.appendChild(newRepsInput);
                 let newSubmit = document.createElement("button");
                 newSubmit.innerHTML = "Submit";
                 newCell.appendChild(newSubmit);
@@ -262,11 +262,11 @@
                 newSubmit.addEventListener("click", async () => {
                   try {
                     const newType = document.getElementById("newType").value;
-                    const newDuration =
-                      document.getElementById("newDuration").value;
+                    const newReps =
+                      document.getElementById("newReps").value;
                     let newEntry = {
                       type: newType,
-                      duration: newDuration,
+                      duration: newReps,
                     };
                     console.log(entry, currentUser);
                     const response = await fetch("/run-edit", {
@@ -284,7 +284,7 @@
                       throw new Error("Problem fetching delete endpoint");
                     }
                     const data = await response.json();
-                    renderRuns();
+                    renderExercises();
                     if (data.reload) {
                       window.location.reload();
                     }
@@ -295,23 +295,10 @@
                   }
                 });
               }
-              renderRuns();
+              renderExercises();
               if (data.reload) {
                 window.location.reload();
               }
-            });
-          } catch (error) {}
-        }
-        document.addEventListener("DOMContentLoaded", renderRuns);
-
-        async function renderExercises() {
-          const tableBody = document.getElementById("exerciseTableBody");
-          tableBody.innerHTML = "";
-          try {
-            currentUser.exercises.forEach((entry) => {
-              console.log(entry);
-              const row = `<tr><td>${entry.type}</td><td>${entry.date}</td><td>${entry.reps}</td></tr>`;
-              tableBody.innerHTML += row;
             });
           } catch (error) {}
         }
