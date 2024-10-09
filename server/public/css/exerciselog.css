@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Chicle&family=Sofadi+One&display=swap');
+
+
+body {
+    background-image: url('/assets/barbells.png');
+    background-size: cover;
+    font-family: "Chicle";
+}
+
+#header {
+    border: 3px solid black;
+    width: 50%;
+    text-align: center;
+    margin: auto;
+    font-size: 3rem;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    background-color: white;
+}
+
+#reps-form {
+    border: 2px solid black;
+    margin: 5px;
+    background-color: white;
+}
+
+#duration-form {
+    border: 2px solid black;
+    margin: 5px;
+    background-color: white;
+}
