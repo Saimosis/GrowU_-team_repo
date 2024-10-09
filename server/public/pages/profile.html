@@ -20,68 +20,185 @@
         <!-- data of users will be rendered here -->
       </tbody>
     </table>
-    <h1>Exercise Logs</h1>
+    <h1>Running Logs</h1>
+    <table id="runningTable">
+      <thead>
+        <tr>
+          <th>Exercie Type</th>
+          <th>Date</th>
+          <th>Duration</th>
+        </tr>
+      </thead>
+      <tbody id="runningTableBody">
+        <!-- data of users will be rendered here -->
+      </tbody>
+    </table>
+    <h1>Exercie Logs</h1>
     <table id="exerciseTable">
       <thead>
         <tr>
-          <th>Title</th>
+          <th>Exercie Type</th>
           <th>Date</th>
-          <th>Entry</th>
+          <th>Reps</th>
         </tr>
       </thead>
       <tbody id="exerciseTableBody">
         <!-- data of users will be rendered here -->
       </tbody>
     </table>
-    <button>Log Out</button>
+    <button id="log-out-button">Log Out</button>
     <script>
-      let currentUser = JSON.parse(localStorage.getItem("currentUser"));
-      let userName = document.getElementById("user-name");
-      userName.innerHTML = currentUser.username;
+      if (localStorage.getItem("loggedIn") === "false") {
+        alert("LOGIN");
+        window.location.href = "/login";
+      } else {
+        let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+        let userName = document.getElementById("user-name");
+        userName.innerHTML = currentUser.username;
 
-      async function fetchUsers() {
-        try {
-          const response = await fetch("/users");
-          if (!response.ok) {
-            throw new Error("Error fetching users. Response not ok");
+        async function fetchUsers() {
+          try {
+            const response = await fetch("/users");
+            if (!response.ok) {
+              throw new Error("Error fetching users. Response not ok");
+            }
+            const users = await response.json();
+            return users;
+          } catch (error) {
+            console.error("There was a problem");
+            console.error(error);
           }
-          // there could be an error getting response/fetching the endpoint
-          // console.log(response);
-          const users = await response.json();
-          // there could be an error parsing the response
-          // console.log(users);
-          return users;
-        } catch (error) {
-          console.error("There was a problem");
-          console.error(error);
         }
-      }
 
-      async function renderUsers() {
+        async function renderDiary() {
           console.log(currentUser.diary);
-        const tableBody = document.getElementById("userTableBody");
-        tableBody.innerHTML = "";
-        try {
-          currentUser.diary.forEach((entry) => {
-            console.log(entry);
-            const row = `<tr><td>${entry.title}</td><td>${entry.date}</td><td>${entry.diary}</td></tr>`;
-            tableBody.innerHTML += row;
-          });
-        } catch (error) {}
+          const tableBody = document.getElementById("userTableBody");
+          tableBody.innerHTML = "";
+          try {
+            currentUser.diary.forEach((entry) => {
+              console.log(entry);
+              const row = `<tr><td>${entry.title}</td><td>${entry.date}</td><td>${entry.diary}</td></tr>`;
+              tableBody.innerHTML += row;
+            });
+          } catch (error) {}
+        }
+        document.addEventListener("DOMContentLoaded", renderDiary);
+
+        async function renderRuns() {
+          const tableBody = document.getElementById("runningTableBody");
+          tableBody.innerHTML = "";
+          try {
+            let index = 0;
+            currentUser.runs.forEach((entry) => {
+              const row = `<tr id="row-${index}"><td>${entry["Exercise Type"]}</td><td>${entry.date}</td><td>${entry.duration} min</td><td><button data-index="${index}" class="delete-button">X</button></td><button edit-index="${index}" class="edit-button">Edit</button></td></tr>`;
+              tableBody.innerHTML += row;
+            });
+            tableBody.addEventListener("click", async (e) => {
+              if (event.target.classList.contains("delete-button")) {
+                const index = event.target.getAttribute("data-index");
+                const entry = currentUser.runs[index]; // Get entry by index
+                try {
+                  console.log(entry, currentUser);
+                  const response = await fetch("/run-delete", {
+                    method: "DELETE",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                      entry,
+                      currentUser,
+                    }),
+                  });
+                  if (!response.ok) {
+                    throw new Error("Problem fetching delete endpoint");
+                  }
+                  let data = await response.json();
+                  renderRuns();
+                  if (data.reload) {
+                    window.location.reload();
+                  }
+                  let user = data.user;
+                  localStorage.setItem("currentUser", JSON.stringify(user));
+                } catch (error) {
+                  console.error("Error deleting run entry:", error);
+                }
+              } else if (event.target.classList.contains("edit-button")) {
+                const index = event.target.getAttribute("edit-index");
+                const entry = currentUser.runs[index]; // Get entry by index
+                e.target.style.display = "none";
+                let newCell = document.createElement("td");
+                let newTypeInput = document.createElement("input");
+                let newTypeHeader = document.createElement("h1");
+                newTypeHeader.innerHTML = "New Type";
+                newCell.appendChild(newTypeHeader);
+                newCell.appendChild(newTypeInput);
+                let newDurationInput = document.createElement("input");
+                let newDurationHeader = document.createElement("h1");
+                newTypeHeader.innerHTML = "New Duration";
+                newCell.appendChild(newDurationHeader);
+                newCell.appendChild(newDurationInput);
+                let newSubmit = document.createElement("button");
+                newSubmit.innerHTML = "Submit";
+                document.getElementById(`row-${index}`).appendChild(newCell);
+                // tableBody.appendChild(newCell);
+                newSubmit.addEventListener("click", async () => {
+                  try {
+                    console.log(entry, currentUser);
+                    const response = await fetch("/run-delete", {
+                      method: "PUT",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify({
+                        entry,
+                        currentUser,
+                      }),
+                    });
+                    if (!response.ok) {
+                      throw new Error("Problem fetching delete endpoint");
+                    }
+                    const data = await response.json();
+                    renderRuns();
+                    if (data.reload) {
+                      window.location.reload();
+                    }
+                    let user = data.user;
+                    localStorage.setItem("currentUser", JSON.stringify(user));
+                  } catch (error) {
+                    console.error("Error deleting run entry:", error);
+                  }
+                });
+              }
+              renderRuns();
+              if (data.reload) {
+                window.location.reload();
+              }
+            });
+            index++;
+          } catch (error) {}
+        }
+        document.addEventListener("DOMContentLoaded", renderRuns);
+
+        async function renderExercises() {
+          const tableBody = document.getElementById("exerciseTableBody");
+          tableBody.innerHTML = "";
+          try {
+            currentUser.exercises.forEach((entry) => {
+              console.log(entry);
+              const row = `<tr><td>${entry["Exercise Type"]}</td><td>${entry.date}</td><td>${entry.reps}</td></tr>`;
+              tableBody.innerHTML += row;
+            });
+          } catch (error) {}
+        }
+        document.addEventListener("DOMContentLoaded", renderExercises);
+
+        const logOutButton = document.getElementById("log-out-button");
+        logOutButton.addEventListener("click", (e) => {
+          localStorage.setItem("loggedIn", false);
+          localStorage.setItem("currentUser", null);
+          window.location.href = "/";
+        });
       }
-      document.addEventListener("DOMContentLoaded", renderUsers);
-      async function renderExercises() {
-        const tableBody = document.getElementById("userTableBody");
-        tableBody.innerHTML = "";
-        try {
-          currentUser.diary.forEach((entry) => {
-            console.log(entry);
-            const row = `<tr><td>${entry.title}</td><td>${entry.date}</td><td>${entry.diary}</td></tr>`;
-            tableBody.innerHTML += row;
-          });
-        } catch (error) {}
-      }
-      document.addEventListener("DOMContentLoaded", renderUsers);
     </script>
   </body>
 </html>

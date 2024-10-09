@@ -23,21 +23,22 @@
     </form>
 
     <script>
-      const currentUser = localStorage.getItem("currentUser");
       document
         .getElementById("duration-form")
         .addEventListener("submit", async (e) => {
           e.preventDefault();
           const dType = document.getElementById("duration-type-input").value;
           const duration = document.getElementById("duration-input").value;
+          const currentUser = JSON.parse(localStorage.getItem("currentUser"));
           try {
-            const response = await fetch(`/d-exercise-submit/${dType}/${duration}/${currentUser}/`, {
+            const response = await fetch(`/d-exercise-submit`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
               },
               body: JSON.stringify({ dType, duration, currentUser }),
             });
+            console.log(response);
 
             if (!response.ok) {
               throw new Error("response no good");
@@ -59,14 +60,18 @@
           e.preventDefault();
           const rType = document.getElementById("reps-type-input").value;
           const reps = document.getElementById("reps-input").value;
+          const currentUser = JSON.parse(localStorage.getItem("currentUser"));
           try {
-            const response = await fetch(`/r-exercise-submit/${rType}/${reps}/${currentUser}`, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({ rType, reps, currentUser }),
-            });
+            const response = await fetch(
+              `/r-exercise-submit`,
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ rType, reps, currentUser }),
+              }
+            );
 
             if (!response.ok) {
               throw new Error("Error");
