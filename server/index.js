@@ -129,7 +129,7 @@ app.post("/d-exercise-submit", async (req, res) => {
       // const fullDate = month + "/" + day + "/" + year;
       const fullDate = `${month}/${day}/${year}`;
 
-      let eLog = { "Exercise Type": dType, date: fullDate, duration: duration };
+      let eLog = { type: dType, date: fullDate, duration: duration };
       users[userIndex].runs.push(eLog);
       console.log(users);
       // let user = users.find(user => user.username === currentUser.username && user.email === currentUser.email);
@@ -173,7 +173,7 @@ app.post("/r-exercise-submit", async (req, res) => {
       // const fullDate = month + "/" + day + "/" + year;
       const fullDate = `${month}/${day}/${year}`;
 
-      let eLog = { "Exercise Type": rType, date: fullDate, reps: reps };
+      let eLog = { type: rType, date: fullDate, reps: reps };
       users[userIndex].exercises.push(eLog);
       console.log(users);
       // let user = users.find(user => user.username === currentUser.username && user.email === currentUser.email);
@@ -296,6 +296,65 @@ app.delete("/run-delete", async (req, res) => {
     }
     //   users[userIndex].diary.push(entry);
     users[userIndex].runs.splice(runIndex, 1);
+    console.log(users[userIndex])
+    try {
+      await fs.writeFile(dataPath, JSON.stringify(users, null, 2));
+    } catch (error) {
+      console.error("Failed to write to database");
+    }
+    res.status(200).json({ user, reload: true });
+    // send a success deleted message
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+
+app.put("/run-edit", async (req, res) => {
+  try {
+    let { entry, newEntry, currentUser } = req.body;
+
+    if (!currentUser || !entry) {
+      return res.status(400).json({ error: "Invalid request data" });
+    }
+
+    // try to read the users.json file and cache as data
+    const data = await fs.readFile(dataPath, "utf8");
+    // parse the data
+    let users = JSON.parse(data);
+
+    // cache the userIndex based on a matching name and email
+    let userIndex = users.findIndex(
+      (user) =>
+        user.username === currentUser.username &&
+        user.email === currentUser.email &&
+        user.password === currentUser.password
+    );
+    console.log(userIndex);
+    if (userIndex === -1) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    let user = users[userIndex];
+    console.log(user.runs[0].type);
+    let runIndex = user.runs.findIndex(
+      (run) =>
+        run.type === entry.type &&
+        run.date === entry.date &&
+        run.duration === entry.duration
+    );
+    console.log(runIndex);
+    if (runIndex === -1) {
+      return res.status(404).json({ error: "Run not found" });
+      }
+
+      users[userIndex].runs[runIndex] = { ...users[userIndex].runs[runIndex], type: newEntry.type, date: entry.date, duration: newEntry.duration}
+
+
+    //   users[userIndex].runs[runIndex]["Exercise Type"] = newEntry["Exercise Type"];
+    //   users[userIndex].runs[runIndex].duration = newEntry.duration;
+    //   users[userIndex].diary.push(entry);
+    // users[userIndex].runs.splice(runIndex, 1);
     console.log(users[userIndex])
     try {
       await fs.writeFile(dataPath, JSON.stringify(users, null, 2));
