@@ -131,6 +131,8 @@
                   console.error("Error deleting run entry:", error);
                 }
               } else if (e.target.classList.contains("edit-button")) {
+                let editForm = document.getElementById("edit-form");
+                editForm.innerHTML = "";
                 const index = event.target.getAttribute("edit-index");
                 const entry = currentUser.runs[index]; // Get entry by index
                 e.target.classList.add("hidden");
@@ -151,7 +153,7 @@
                 let newSubmit = document.createElement("button");
                 newSubmit.innerHTML = "Submit";
                 newCell.appendChild(newSubmit);
-                document.getElementById("edit-form").appendChild(newCell);
+                editForm.appendChild(newCell);
                 newSubmit.addEventListener("click", async () => {
                   try {
                     const newType = document.getElementById("newType").value;
@@ -204,7 +206,7 @@
           try {
             let index = 0;
             currentUser.exercises.forEach((entry) => {
-              const row = `<tr id="row-${index}"><td>${entry.type}</td><td>${entry.date}</td><td>${entry.reps} min</td><td><button data-index="${index}" class="delete-button">X</button></td><button edit-index="${index}" class="edit-button">Edit</button></td></tr>`;
+              const row = `<tr id="row-${index}"><td>${entry.type}</td><td>${entry.date}</td><td>${entry.reps} reps</td><td><button data-index="${index}" class="delete-button">X</button></td><button edit-index="${index}" class="edit-button">Edit</button></td></tr>`;
               index++;
               tableBody.innerHTML += row;
             });
@@ -214,7 +216,7 @@
                 const entry = currentUser.runs[index]; // Get entry by index
                 try {
                   console.log(entry, currentUser);
-                  const response = await fetch("/run-delete", {
+                  const response = await fetch("/exercise-delete", {
                     method: "DELETE",
                     headers: {
                       "Content-Type": "application/json",
@@ -238,6 +240,8 @@
                   console.error("Error deleting run entry:", error);
                 }
               } else if (e.target.classList.contains("edit-button")) {
+                let exerciseEditForm = document.getElementById("exercise-edit-form");
+                exerciseEditForm.innerHTML = "";
                 const index = event.target.getAttribute("edit-index");
                 const entry = currentUser.exercises[index]; // Get entry by index
                 e.target.classList.add("hidden");
@@ -252,13 +256,13 @@
                 let newRepsInput = document.createElement("input");
                 newRepsInput.id = "newReps";
                 let newRepsHeader = document.createElement("h1");
-                newDurationHeader.innerHTML = "New Reps";
+                newRepsHeader.innerHTML = "New Reps";
                 newCell.appendChild(newRepsHeader);
                 newCell.appendChild(newRepsInput);
                 let newSubmit = document.createElement("button");
                 newSubmit.innerHTML = "Submit";
                 newCell.appendChild(newSubmit);
-                document.getElementById("edit-form").appendChild(newCell);
+                exerciseEditForm.appendChild(newCell);
                 newSubmit.addEventListener("click", async () => {
                   try {
                     const newType = document.getElementById("newType").value;
@@ -266,10 +270,10 @@
                       document.getElementById("newReps").value;
                     let newEntry = {
                       type: newType,
-                      duration: newReps,
+                      reps: newReps,
                     };
                     console.log(entry, currentUser);
-                    const response = await fetch("/run-edit", {
+                    const response = await fetch("/exercise-edit", {
                       method: "PUT",
                       headers: {
                         "Content-Type": "application/json",

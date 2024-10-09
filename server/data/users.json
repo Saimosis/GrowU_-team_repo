@@ -47,11 +47,26 @@
         "duration": "23"
       },
       {
-        "type": "Tree",
+        "type": "Not a trww",
         "date": "10/9/2024",
-        "duration": "2000000000"
+        "duration": "3"
       }
     ],
-    "exercises": []
+    "exercises": [
+      {
+        "type": "asdfasdf",
+        "date": "10/9/2024",
+        "reps": "11111111111"
+      },
+      {
+        "type": "big",
+        "date": "10/9/2024"
+      },
+      {
+        "type": "Curls",
+        "date": "10/9/2024",
+        "reps": "102"
+      }
+    ]
   }
 ]

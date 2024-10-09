@@ -228,12 +228,12 @@ app.put("/exercise-edit", async (req, res) => {
       return res.status(404).json({ error: "User not found" });
     }
     let user = users[userIndex];
-    console.log(user.runs[0].type);
+    console.log(user.exercises[0].type);
     let exerciseIndex = user.exercises.findIndex(
       (exercise) =>
         exercise.type === entry.type &&
         exercise.date === entry.date &&
-        exercise.duration === entry.reps
+        exercise.reps === entry.reps
     );
     console.log(exerciseIndex);
     if (exerciseIndex === -1) {
