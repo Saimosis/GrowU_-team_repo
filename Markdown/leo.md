@@ -22,3 +22,11 @@
 > One idea/topic I had to revisit from last year was localStorage when building our project.
 > One real world reference website we have used to inspire our work is EOS Fitness
 > We have not considered how users with sight disabilities might view our site. We might have to change some font sizes/color choices.
+
+# 10/9/2024
+
+### Meeting Requirements
+> 6. I beleieve our project met the functionality requirements outlined in the rubric. We have everything covered but some things could have been improved further. Our design could have been more cohesive, not all the colors are matching. There could have been more comments to organize our code.
+
+### Personal And Team Growth
+> 7. The most significant lesson I learned from this is to make a list of things that need to get done. After you have that list you should order them by importance. Our team strengths were working together. When we eorked together we got stuff done pretty fast. 
