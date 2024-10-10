@@ -21,3 +21,8 @@ journal entry 10/7/2024
 1. I had to revisit text and box shadows.
 2. I referenced the EOS Fitness website because it has a really nice design setup for fitnes goal.
 3. I haven't considered user with sight disabilities but I don't think I need to recalibrate my font sizes/colors.
+
+journal entry 10/9/2024
+3.1: I learned that when leading a group of people, it's good to foster an environment of thinkers rather than just followers.
+4.1: I'm really proud of being able to use flex properties in CSS. Up until now, I never really got the gist of it and stuck to the grid system instead. Today, I was able to get a good understanding of flex through some online research.
+5.1: I feel like my website designs really made the experience more user-friendly. Rather than the generic hardcore health and gym aesthetics that fitness websites tend to use, I used images with more relaxed colors.
