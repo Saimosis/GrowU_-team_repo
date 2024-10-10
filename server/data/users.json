@@ -68,5 +68,25 @@
         "reps": "102"
       }
     ]
+  },
+  {
+    "username": "fard",
+    "email": "fard@gmail.com",
+    "password": "fard",
+    "diary": [],
+    "runs": [
+      {
+        "type": "run",
+        "date": "10/9/2024",
+        "duration": "7"
+      }
+    ],
+    "exercises": [
+      {
+        "type": "bicep curls",
+        "date": "10/9/2024",
+        "reps": "10000000"
+      }
+    ]
   }
 ]

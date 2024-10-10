@@ -2,6 +2,8 @@
 
 body {
     font-family: "Chicle";
+    background-color: #2d9d96
+
 }
 
 button {
@@ -10,13 +12,20 @@ button {
 
 #user-name {
     border: 1px solid black;
+    background-color: white;
 }
 #usersTable {
     border: 1px solid black;
+     background-color: white;
 }
 
+#exerciseTable {
+     border: 1px solid black;
+     background-color: white;
 
+}
 #runningTable {
     border: 1px solid black;
+     background-color: white;
 }
 
