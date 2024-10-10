@@ -4,6 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profile</title>
+    <style>
+      .hidden {
+        display: none;
+      }
+    </style>
     <link rel="stylesheet" href="/css/profile.css" />
   </head>
 
@@ -37,8 +42,7 @@
         <!-- data of users will be rendered here -->
       </tbody>
     </table>
-
-    <h1>Exercise Logs</h1>
+    <h1>Exercie Logs</h1>
     <table id="exerciseTable">
       <thead>
         <tr>
@@ -51,6 +55,7 @@
         <!-- data of users will be rendered here -->
       </tbody>
     </table>
+    <div id="exercise-edit-form"></div>
     <button id="log-out-button">Log Out</button>
 
 
@@ -97,11 +102,12 @@
           try {
             let index = 0;
             currentUser.runs.forEach((entry) => {
-              const row = `<tr id="row-${index}"><td>${entry["Exercise Type"]}</td><td>${entry.date}</td><td>${entry.duration} min</td><td><button data-index="${index}" class="delete-button">X</button></td><button edit-index="${index}" class="edit-button">Edit</button></td></tr>`;
+              const row = `<tr id="row-${index}"><td>${entry.type}</td><td>${entry.date}</td><td>${entry.duration} min</td><td><button data-index="${index}" class="delete-button">X</button></td><button edit-index="${index}" class="edit-button">Edit</button></td></tr>`;
+              index++;
               tableBody.innerHTML += row;
             });
             tableBody.addEventListener("click", async (e) => {
-              if (event.target.classList.contains("delete-button")) {
+              if (e.target.classList.contains("delete-button")) {
                 const index = event.target.getAttribute("data-index");
                 const entry = currentUser.runs[index]; // Get entry by index
                 try {
@@ -119,7 +125,7 @@
                   if (!response.ok) {
                     throw new Error("Problem fetching delete endpoint");
                   }
-                  let data = await response.json();
+                  const data = await response.json();
                   renderRuns();
                   if (data.reload) {
                     window.location.reload();
@@ -129,35 +135,48 @@
                 } catch (error) {
                   console.error("Error deleting run entry:", error);
                 }
-              } else if (event.target.classList.contains("edit-button")) {
+              } else if (e.target.classList.contains("edit-button")) {
+                let editForm = document.getElementById("edit-form");
+                editForm.innerHTML = "";
                 const index = event.target.getAttribute("edit-index");
                 const entry = currentUser.runs[index]; // Get entry by index
-                e.target.style.display = "none";
-                let newCell = document.createElement("td");
+                e.target.classList.add("hidden");
+                console.log(e.target);
+                let newCell = document.createElement("div");
                 let newTypeInput = document.createElement("input");
+                newTypeInput.id = "newType";
                 let newTypeHeader = document.createElement("h1");
                 newTypeHeader.innerHTML = "New Type";
                 newCell.appendChild(newTypeHeader);
                 newCell.appendChild(newTypeInput);
                 let newDurationInput = document.createElement("input");
+                newDurationInput.id = "newDuration";
                 let newDurationHeader = document.createElement("h1");
-                newTypeHeader.innerHTML = "New Duration";
+                newDurationHeader.innerHTML = "New Duration";
                 newCell.appendChild(newDurationHeader);
                 newCell.appendChild(newDurationInput);
                 let newSubmit = document.createElement("button");
                 newSubmit.innerHTML = "Submit";
-                document.getElementById(`row-${index}`).appendChild(newCell);
-                // tableBody.appendChild(newCell);
+                newCell.appendChild(newSubmit);
+                editForm.appendChild(newCell);
                 newSubmit.addEventListener("click", async () => {
                   try {
+                    const newType = document.getElementById("newType").value;
+                    const newDuration =
+                      document.getElementById("newDuration").value;
+                    let newEntry = {
+                      type: newType,
+                      duration: newDuration,
+                    };
                     console.log(entry, currentUser);
-                    const response = await fetch("/run-delete", {
+                    const response = await fetch("/run-edit", {
                       method: "PUT",
                       headers: {
                         "Content-Type": "application/json",
                       },
                       body: JSON.stringify({
                         entry,
+                        newEntry,
                         currentUser,
                       }),
                     });
@@ -181,19 +200,114 @@
                 window.location.reload();
               }
             });
-            index++;
           } catch (error) {}
         }
         document.addEventListener("DOMContentLoaded", renderRuns);
+
 
         async function renderExercises() {
           const tableBody = document.getElementById("exerciseTableBody");
           tableBody.innerHTML = "";
           try {
+            let index = 0;
             currentUser.exercises.forEach((entry) => {
-              console.log(entry);
-              const row = `<tr><td>${entry["Exercise Type"]}</td><td>${entry.date}</td><td>${entry.reps}</td></tr>`;
+              const row = `<tr id="row-${index}"><td>${entry.type}</td><td>${entry.date}</td><td>${entry.reps} reps</td><td><button data-index="${index}" class="delete-button">X</button></td><button edit-index="${index}" class="edit-button">Edit</button></td></tr>`;
+              index++;
               tableBody.innerHTML += row;
+            });
+            tableBody.addEventListener("click", async (e) => {
+              if (e.target.classList.contains("delete-button")) {
+                const index = event.target.getAttribute("data-index");
+                const entry = currentUser.runs[index]; // Get entry by index
+                try {
+                  console.log(entry, currentUser);
+                  const response = await fetch("/exercise-delete", {
+                    method: "DELETE",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                      entry,
+                      currentUser,
+                    }),
+                  });
+                  if (!response.ok) {
+                    throw new Error("Problem fetching delete endpoint");
+                  }
+                  const data = await response.json();
+                  renderRuns();
+                  if (data.reload) {
+                    window.location.reload();
+                  }
+                  let user = data.user;
+                  localStorage.setItem("currentUser", JSON.stringify(user));
+                } catch (error) {
+                  console.error("Error deleting run entry:", error);
+                }
+              } else if (e.target.classList.contains("edit-button")) {
+                let exerciseEditForm = document.getElementById("exercise-edit-form");
+                exerciseEditForm.innerHTML = "";
+                const index = event.target.getAttribute("edit-index");
+                const entry = currentUser.exercises[index]; // Get entry by index
+                e.target.classList.add("hidden");
+                console.log(e.target);
+                let newCell = document.createElement("div");
+                let newTypeInput = document.createElement("input");
+                newTypeInput.id = "newType";
+                let newTypeHeader = document.createElement("h1");
+                newTypeHeader.innerHTML = "New Type";
+                newCell.appendChild(newTypeHeader);
+                newCell.appendChild(newTypeInput);
+                let newRepsInput = document.createElement("input");
+                newRepsInput.id = "newReps";
+                let newRepsHeader = document.createElement("h1");
+                newRepsHeader.innerHTML = "New Reps";
+                newCell.appendChild(newRepsHeader);
+                newCell.appendChild(newRepsInput);
+                let newSubmit = document.createElement("button");
+                newSubmit.innerHTML = "Submit";
+                newCell.appendChild(newSubmit);
+                exerciseEditForm.appendChild(newCell);
+                newSubmit.addEventListener("click", async () => {
+                  try {
+                    const newType = document.getElementById("newType").value;
+                    const newReps =
+                      document.getElementById("newReps").value;
+                    let newEntry = {
+                      type: newType,
+                      reps: newReps,
+                    };
+                    console.log(entry, currentUser);
+                    const response = await fetch("/exercise-edit", {
+                      method: "PUT",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify({
+                        entry,
+                        newEntry,
+                        currentUser,
+                      }),
+                    });
+                    if (!response.ok) {
+                      throw new Error("Problem fetching delete endpoint");
+                    }
+                    const data = await response.json();
+                    renderExercises();
+                    if (data.reload) {
+                      window.location.reload();
+                    }
+                    let user = data.user;
+                    localStorage.setItem("currentUser", JSON.stringify(user));
+                  } catch (error) {
+                    console.error("Error deleting run entry:", error);
+                  }
+                });
+              }
+              renderExercises();
+              if (data.reload) {
+                window.location.reload();
+              }
             });
           } catch (error) {}
         }
