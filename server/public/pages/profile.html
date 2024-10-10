@@ -61,7 +61,7 @@
 
     <script>
       if (localStorage.getItem("loggedIn") === "false") {
-        alert("LOGIN");
+        alert("Please log in before accessing this page");
         window.location.href = "/login";
       } else {
         let currentUser = JSON.parse(localStorage.getItem("currentUser"));
@@ -150,6 +150,7 @@
                 newCell.appendChild(newTypeHeader);
                 newCell.appendChild(newTypeInput);
                 let newDurationInput = document.createElement("input");
+                newDurationInput.setAttribute("type", "number");
                 newDurationInput.id = "newDuration";
                 let newDurationHeader = document.createElement("h1");
                 newDurationHeader.innerHTML = "New Duration";
@@ -259,6 +260,7 @@
                 newCell.appendChild(newTypeHeader);
                 newCell.appendChild(newTypeInput);
                 let newRepsInput = document.createElement("input");
+                newRepsInput.setAttribute("type", "number");
                 newRepsInput.id = "newReps";
                 let newRepsHeader = document.createElement("h1");
                 newRepsHeader.innerHTML = "New Reps";

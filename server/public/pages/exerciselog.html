@@ -31,6 +31,13 @@
 </div>
 
     <script>
+
+      if (localStorage.getItem("loggedIn") === "false") {
+        alert("Please log in before accessing this page");
+        window.location.href = "/login";
+      }
+
+
       document
         .getElementById("duration-form")
         .addEventListener("submit", async (e) => {

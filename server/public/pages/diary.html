@@ -23,6 +23,11 @@
 
    <script>
 
+      if (localStorage.getItem("loggedIn") === "false") {
+        alert("Please log in before accessing this page");
+        window.location.href = "/login";
+      }
+
       document
         .getElementById("diary-form")
         .addEventListener("submit", async (e) => {
