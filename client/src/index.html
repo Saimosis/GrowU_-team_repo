@@ -112,9 +112,9 @@
     </footer>
 
     <script>
-      // if (localStorage.getItem("loggedIn") == null) {
-      // 	localStorage.setItem("loggedIn", false);
-      // }
+      if (localStorage.getItem("loggedIn") == null) {
+      localStorage.setItem("loggedIn", false);
+      }
       let currentUser = JSON.parse(localStorage.getItem("currentUser"));
       let userAnchor = document.getElementById("userAnchor");
       let userButton = document.getElementById("userButton");

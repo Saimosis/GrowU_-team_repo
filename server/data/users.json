@@ -1,111 +1,48 @@
 [
   {
-    "username": "asdffds",
-    "email": "a@a.com",
-    "password": "adsfsfd",
-    "diary": [],
+    "username": "Admin",
+    "email": "admin@gmail.com",
+    "password": "Admin12345$",
+    "diary": [
+      {
+        "title": "im tired",
+        "date": "10/10/2024",
+        "diary": "i need sleep"
+      }
+    ],
     "runs": [],
     "exercises": []
   },
   {
-    "username": "vvvvvvvv",
-    "email": "ab@a.com",
-    "password": "vvvvvv",
-    "diary": [],
-    "runs": [],
-    "exercises": []
-  },
-  {
-    "username": "b",
-    "email": "b@b.com",
-    "password": "b",
+    "username": "marquez",
+    "email": "sigma@gmail.com",
+    "password": "Sigmamale89!",
     "diary": [],
     "runs": [],
     "exercises": []
   },
   {
     "username": "Leo",
-    "email": "leo@leo.com",
-    "password": "Hamster303$",
+    "email": "leo@gmail.com",
+    "password": "Leo12345$",
     "diary": [
       {
-        "title": "Bob",
+        "title": "kgh",
         "date": "10/10/2024",
-        "diary": "Today I worked put"
-      },
-      {
-        "title": "asdf",
-        "date": "10/10/2024",
-        "diary": "asdf"
-      },
-      {
-        "title": "asdffff",
-        "date": "10/10/2024",
-        "diary": "asdfasdfadsf"
-      },
-      {
-        "title": "asdfffffff",
-        "date": "10/10/2024",
-        "diary": "asdfasdfadsfffadsfasdf"
+        "diary": "mhghjg"
       }
     ],
-    "runs": [
-      {
-        "type": "bru",
-        "date": "10/10/2024",
-        "duration": "233"
-      },
-      {
-        "type": "da",
-        "date": "10/10/2024",
-        "duration": "23"
-      },
-      {
-        "type": "dada",
-        "date": "10/10/2024",
-        "duration": "12"
-      }
-    ],
-    "exercises": []
-  },
-  {
-    "username": "r",
-    "email": "r@r.com",
-    "password": "Hamster303$",
-    "diary": [
-      {
-        "title": "sdf",
-        "date": "10/10/2024",
-        "diary": "sdaf"
-      },
-      {
-        "title": "dasf",
-        "date": "10/10/2024",
-        "diary": "dsaf"
-      },
-      {
-        "title": "dsf",
-        "date": "10/10/2024",
-        "diary": "adsf"
-      }
-    ],
-    "runs": [
-      {
-        "type": "q",
-        "date": "10/10/2024",
-        "duration": "1"
-      },
-      {
-        "type": "ee",
-        "date": "10/10/2024",
-        "duration": "23222"
-      }
-    ],
+    "runs": [],
     "exercises": [
       {
-        "type": "ddddddddddddd",
+        "type": "Push ups",
         "date": "10/10/2024",
-        "reps": "-1"
+        "reps": "4"
+      },
+      {
+        "type": "Curls",
+        "date": "10/10/2024",
+        "reps": "40"
       }
     ]
   }

@@ -308,12 +308,13 @@
                       throw new Error("Problem fetching delete endpoint");
                     }
                     const data = await response.json();
-                    let user = data.user;
-                    localStorage.setItem("currentUser", JSON.stringify(user));
                     renderRuns();
                     if (data.reload) {
                       window.location.reload();
                     }
+                    
+                    let user = data.user;
+                    localStorage.setItem("currentUser", JSON.stringify(user));
                   } catch (error) {
                     console.error("Error deleting run entry:", error);
                   }
