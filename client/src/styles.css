@@ -1,7 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Lexend:wght@100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chicle&family=Sofadi+One&display=swap");
-html, body {
+
+html,
+body {
   margin: 0;
-  padding: 0
+  padding: 0;
 }
 
 /* ADDED HTML BODY TO MAKE THE FOOTER STAY */
@@ -46,11 +49,9 @@ body {
   /* box-shadow: 10px 5px 5px white; */
   opacity: 1;
   z-index: 100;
-  
 }
 
 #nav {
-  
   overflow: hidden;
   height: 5vh;
   padding: 5px;
@@ -60,7 +61,6 @@ body {
   border-bottom-left-radius: 25px;
   border-bottom-right-radius: 25px;
 
-  
   text-align: center;
   display: flex;
   flex-direction: row;
@@ -69,7 +69,6 @@ body {
   align-items: center;
   /* box-shadow: 10px 5px 5px white; */
   /* opacity: 0.5; */
-  
 }
 #nav a {
   display: block;
@@ -83,7 +82,6 @@ body {
   /*   background-color: gray; */
   display: flex;
   justify-content: start;
-  
 }
 
 .growu-logo img {
@@ -136,8 +134,8 @@ ul {
   background-color: #050e14;
   padding: 20px 0;
   min-height: 10vw;
-/*   TOOK AWAY "position: fixed;" to let other content in the middle to stay */
-/*   position: fixed; */
+  /*   TOOK AWAY "position: fixed;" to let other content in the middle to stay */
+  /*   position: fixed; */
   left: 0;
   bottom: 0;
   width: 100%;
@@ -220,3 +218,44 @@ ul {
   padding: 5px;
 }
 
+.content-container {
+  display: flex; /* Use flexbox to arrange child elements */
+  text-align: center;
+  width: 80vw;
+  min-height: 60vh;
+  align-items: center; /* Center vertically */
+  border-radius: 25px;
+  padding: 20px;
+  margin: 5vh auto;
+  background-color: rgba(225, 252, 248, 0.8);
+}
+
+.left-content {
+  flex: 1; /* Allow this div to grow */
+  display: flex; /* Flexbox for the image */
+  justify-content: flex-start; /* Align content to the start (left) */
+}
+
+.right-content {
+  /*   display: flex;
+ flex-direction: column-reverse; */
+  margin-left: 20px;
+}
+
+.image {
+  max-width: 100%; /* Ensure the image is responsive */
+  height: auto; /* Maintain aspect ratio */
+}
+
+.logbutton button {
+  border: none;
+  background-color: #6dabab;
+  width: 40%;
+  height: 40px;
+  border-radius: 40px;
+  font-family: "Lexend";
+}
+
+.logbutton button:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 1), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}

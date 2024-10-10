@@ -1,50 +1,299 @@
-@import url('https://fonts.googleapis.com/css2?family=Chicle&family=Sofadi+One&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Chicle&family=Sofadi+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Lexend:wght@100..900&display=swap");
 
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#navbar {
+  overflow: hidden;
+  height: 5vh;
+  padding: 10px;
+  width: 80%;
+  margin: auto;
+  background-color: rgba(225, 252, 248, 0.8);
+  border-radius: 25px;
+
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  /* flex-flow: column wrap; */
+  justify-content: space-between;
+  align-items: center;
+  /* box-shadow: 10px 5px 5px white; */
+  opacity: 1;
+  z-index: 100;
+}
+
+#nav {
+  overflow: hidden;
+  height: 5vh;
+  padding: 5px;
+  width: 60%;
+  margin: auto;
+  background-color: rgba(225, 252, 248, 0.8);
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  /* flex-flow: column wrap; */
+  justify-content: space-around;
+  align-items: center;
+  /* box-shadow: 10px 5px 5px white; */
+  /* opacity: 0.5; */
+}
+#nav a {
+  display: block;
+  opacity: 1;
+  z-index: 100;
+  text-decoration: none;
+  color: rgb(3, 59, 40);
+  font-family: "Chicle";
+}
+.growu-logo {
+  flex: 1;
+  /*   background-color: gray; */
+  display: flex;
+  justify-content: start;
+}
+
+.growu-logo img {
+  width: 50px;
+  height: 50px;
+  /*   background-color: blue; */
+}
+
+.navbar-logo {
+  margin: 0;
+  flex: 3;
+  /*   background-color: yellow; */
+  color: rgb(3, 59, 40);
+  text-shadow: 3px 1px 7px white;
+  font-family: "Chicle";
+}
+
+.signInLogIn {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  font-family: "Chicle";
+  flex: 1;
+  font-weight: 1;
+  text-decoration: none;
+  font-family: "Chicle";
+}
+
+.signInLogIn button {
+  border: none;
+  color: rgb(3, 59, 40);
+  text-decoration: none;
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  font-family: "Chicle";
+}
+
+.container {
+  max-width: 1170px;
+  margin: auto;
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+ul {
+  list-style: none;
+}
+.footer {
+  background-color: #050e14;
+  padding: 20px 0;
+  min-height: 10vw;
+  /*   TOOK AWAY "position: fixed;" to let other content in the middle to stay */
+  /*   position: fixed; */
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  font-family: "Chicle";
+}
+.footer-col {
+  width: 25%;
+  padding: 0 15px;
+}
+.footer-col h4 {
+  font-size: 18px;
+  color: #f0f2f2;
+  text-transform: capitalize;
+  margin-bottom: 35px;
+  font-weight: 500;
+  position: relative;
+}
+.footer-col h4::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  background-color: #7fafa8;
+  height: 2px;
+  box-sizing: border-box;
+  width: 50px;
+}
+.footer-col ul li:not(:last-child) {
+  margin-bottom: 10px;
+}
+.footer-col ul li a {
+  font-size: 16px;
+  text-transform: capitalize;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 300;
+  color: #7ebec4;
+  display: block;
+  transition: all 0.3s ease;
+}
+.footer-col ul li a:hover {
+  color: #b5f2f8;
+  padding-left: 8px;
+}
+
+.footer-col .social-links a {
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  background-color: #f0f2f2;
+  margin: 0 10px 10px 0;
+  text-align: center;
+  line-height: 40px;
+  border-radius: 50%;
+  color: #ffffff;
+  transition: all 0.5s ease;
+}
+.footer-col .social-links a:hover {
+  color: #24262b;
+  background-color: #ffffff;
+}
+
+/*responsive*/
+@media (max-width: 767px) {
+  .footer-col {
+    width: 50%;
+    margin-bottom: 30px;
+  }
+}
+@media (max-width: 574px) {
+  .footer-col {
+    width: 100%;
+  }
+}
+
+.social-links img {
+  width: 40px; /* Adjust size as needed */
+  height: 40px; /* Maintain aspect ratio */
+  background-color: white;
+  border-radius: 40px;
+  padding: 5px;
+}
 
 body {
-    background-image: url('/assets/barbells.png');
-    background-size: cover;
-    font-family: "Chicle";
+  background-image: url("/assets/barbells.png");
+  background-size: cover;
+  font-family: "Chicle";
 }
 
 #header {
-    border: 3px solid black;
-    width: 50%;
-    text-align: center;
-    margin: auto;
-    font-size: 3rem;
-    border-radius: 1rem;
-    margin-bottom: 2rem;
-    background-color: white;
+  border: 3px solid black;
+  width: 50%;
+  text-align: center;
+  margin: auto;
+  font-size: 3rem;
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+  background-color: white;
+  margin-top: 5vh;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 1), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 #reps-type-input {
-    max-height: 50%;
-} 
+  max-height: 50%;
+}
 
 .form-wrapper {
-    border: 2px solid black;
-    background-color: white;
-    min-height: 10vh;
-    text-align:center
+  border: 2px solid black;
+  background-color: white;
+  border-radius: 3vw;
+  /* background-color: red; */
+  width: 80%;
+  margin: auto;
+  min-height: 10vh;
+  text-align: center;
+  margin-bottom: 5vh;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 1), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .exercise-form {
-    border: 2px solid black;
-    margin: auto;
-    background-color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  /* border: 2px solid black; */
+  margin: auto;
+  /* background-color: white; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #duration-form {
-    margin: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #duration-type-input {
-    max-height: 50%;
+  max-height: 50%;
+}
+
+input {
+  border-radius: 3vw;
+  padding-left: 1vw;
+  font-size: 1.2vw;
+}
+
+input,
+button {
+  font-family: "Lexend";
+}
+
+h2 {
+  font-size: 1.7vw;
+}
+
+#submit-wrapper {
+  width: 100%;
+  margin: auto;
+  text-align: center;
+}
+
+.item-wrapper {
+  margin: 1vw;
+}
+
+label {
+  font-size: 1.2vw;
+  margin-bottom: 1vh;
+}
+
+button {
+  margin: 1vw;
+  margin-top: 5vh;
+  padding: 1.5vh;
+  font-size: 1.2vw;
+  border-radius: 3vw;
+  padding-left: 1.5vw;
+  padding-right: 1.5vw;
+  box-shadow: 0 0 0;
+  transition: boxShadow 1s;
+}
+
+button:hover {
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 1), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }

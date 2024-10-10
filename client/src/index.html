@@ -5,75 +5,128 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Grow U - Home</title>
     <link rel="stylesheet" href="/styles.css" />
+    <link rel="icon" type="image/png" href="./assets/growULogo.png" />
   </head>
   <body>
-
     <div id="navbar">
       <div class="growu-logo">
-        <img src="./assets/growULogo.png" />
+        <img id="home-button" alt="" src="./assets/growULogo.png" />
       </div>
       <h1 class="navbar-logo">Grow U</h1>
-      <a href="/signup" id="userAnchor" class="signInLogIn"><button id="userButton">SignUp/Login</button></a>
+      <a href="/signup" id="userAnchor" class="signInLogIn"
+        ><button id="userButton">SignUp/Login</button></a
+      >
     </div>
- <div id="nav">
-   <a href="/about">About</a>
-          <a href="/diary">Diary</a>
-           <a href="/exerciselog">Log</a>
-        <a href="/profile">Profile</a>
+    <div id="nav">
+      <a href="/about">About</a>
+      <a href="/diary">Diary</a>
+      <a href="/exerciselog">Log</a>
+      <a href="/profile">Profile</a>
     </div>
     <!-- START OF CONTENT -->
-    
-<div class="content-container">
 
-</div>
+    <div class="content-container">
+      <img
+        alt=""
+        class="content1 left-content"
+        src="https://png.pngtree.com/png-vector/20240204/ourmid/pngtree-man-workout-exercise-png-image_11609649.png"
+        width="500"
+        height="600"
+      />
+      <div class="right-content">
+        <h1 class="content2">Track Your Progress, Transform Your Health!</h1>
+        <h2 class="content3">
+          Using our website to track your health offers a seamless and engaging
+          way to monitor your progress. With intuitive features and personalized
+          insights, you can easily log your workouts, meals, and wellness goals
+          all in one place. Our platform not only helps you stay organized but
+          also provides valuable feedback and community support, making your
+          health journey more motivating and enjoyable.
+        </h2>
+        <a href="/exerciselog" class="logbutton content4"
+          ><button>Track your health now!</button></a
+        >
+      </div>
+    </div>
 
-<!-- END OF CONTENT -->
-<footer class="footer">
-  	 <div class="container">
-  	 	<div class="row">
-  	 		<div class="footer-col">
-  	 			<h4>GrowU Navigation</h4>
-  	 			<ul>
-  	 				<li><a href="/about">About us</a></li>
-  	 				<li><a href="/diary">GrowU Diary</a></li>
-  	 				<li><a href="/exerciselog">Exercise log</a></li>
-  	 				<li><a href="https://www.termsfeed.com/legal/privacy-policy/">Privacy Policy</a></li>
-  	 			</ul>
-  	 		</div>
-  	 		<div class="footer-col">
-  	 			<h4>Helpful Links</h4>
-  	 			<ul>
-  	 				<li><a href="#">Web</a></li>
-  	 				<li><a href="#">App</a></li>
-  	 				<li><a href="#">Logging Help</a></li>
-  	 				<li><a href="#">Subscription</a></li>
-  	 				<li><a href="#">Other Services</a></li>
-  	 			</ul>
-  	 		</div>
-  	 	
-  	 		<div class="footer-col">
-  	 			<h4>Contact Us</h4>
-  	 			<div class="social-links">
-  	 				<img src="https://icones.pro/wp-content/uploads/2021/03/logo-icone-tiktok-simbolo-noir.png" ></i></a>
-  	 				<img src="https://www.iconpacks.net/icons/2/free-instagram-logo-icon-3497-thumb.png" ><i class="fab "></i></a>
-  	 				<img src="https://freepnglogo.com/images/all_img/1691832278twitter-x-logo-png.png" ><i class="fab "></i></a>
-  	 				<img src="https://images.freeimages.com/fic/images/icons/2779/simple_icons/4096/tumblr_4096_black.png" ><i class="fab "></i></a>
-            <img src="https://cdn-icons-png.flaticon.com/256/20/20673.png" ><i class="fab"></i></a>
-            <img src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/0/e/e/0eeeb19633422b1241f4306419a0f15f39d58de9.png" ><i class="fab"></i></a>
+    <!-- END OF CONTENT -->
 
-  	 			</div>
-  	 		</div>
-  	 	</div>
-  	 </div>
-  </footer>
-   <script>
-	let currentUser = JSON.parse(localStorage.getItem("currentUser"));
-	let userAnchor = document.getElementById("userAnchor");
-	let userButton = document.getElementById("userButton");
-	if (localStorage.getItem("loggedIn") === "true") {
-		userButton.innerHTML = `Hello ${currentUser.username}!`; 
-		userAnchor.setAttribute("href", "/profile"); 
-	}
-   </script> 
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="footer-col">
+            <h4>GrowU Navigation</h4>
+            <ul>
+              <li><a href="/about">About us</a></li>
+              <li><a href="/diary">GrowU Diary</a></li>
+              <li><a href="/exerciselog">Exercise log</a></li>
+              <li>
+                <a href="https://www.termsfeed.com/legal/privacy-policy/"
+                  >Privacy Policy</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Helpful Links</h4>
+            <ul>
+              <li><a href="#">Web</a></li>
+              <li><a href="#">App</a></li>
+              <li><a href="#">Logging Help</a></li>
+              <li><a href="#">Subscription</a></li>
+              <li><a href="#">Other Services</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>Contact Us</h4>
+            <div class="social-links">
+              <img
+                alt=""
+                src="https://icones.pro/wp-content/uploads/2021/03/logo-icone-tiktok-simbolo-noir.png"
+              />
+              <img
+                alt=""
+                src="https://www.iconpacks.net/icons/2/free-instagram-logo-icon-3497-thumb.png"
+              /><i class="fab"></i>
+              <img
+                alt=""
+                src="https://freepnglogo.com/images/all_img/1691832278twitter-x-logo-png.png"
+              /><i class="fab"></i>
+              <img
+                alt=""
+                src="https://images.freeimages.com/fic/images/icons/2779/simple_icons/4096/tumblr_4096_black.png"
+              /><i class="fab"></i>
+              <img
+                alt=""
+                src="https://cdn-icons-png.flaticon.com/256/20/20673.png"
+              /><i class="fab"></i>
+              <img
+                alt=""
+                src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/0/e/e/0eeeb19633422b1241f4306419a0f15f39d58de9.png"
+              /><i class="fab"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // if (localStorage.getItem("loggedIn") == null) {
+      // 	localStorage.setItem("loggedIn", false);
+      // }
+      let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+      let userAnchor = document.getElementById("userAnchor");
+      let userButton = document.getElementById("userButton");
+      if (localStorage.getItem("loggedIn") === "true") {
+        userButton.innerHTML = `Hello ${currentUser.username}!`;
+        userAnchor.setAttribute("href", "/profile");
+      }
+
+      let homeButton = document.getElementById("home-button");
+      homeButton.addEventListener("click", () => {
+        window.location.href = "/";
+      });
+    </script>
   </body>
 </html>

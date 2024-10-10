@@ -5,38 +5,170 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="/css/exerciselog.css" />
+    <link rel="icon" type="image/png" href="./assets/growULogo.png" />
   </head>
 
   <body>
+    <div id="navbar">
+      <div class="growu-logo">
+        <img id="home-button" alt="" src="./assets/growULogo.png" />
+      </div>
+      <h1 class="navbar-logo">Grow U</h1>
+      <a href="/signup" id="userAnchor" class="signInLogIn"
+        ><button id="userButton">SignUp/Login</button></a
+      >
+    </div>
+    <div id="nav">
+      <a href="/about">About</a>
+      <a href="/diary">Diary</a>
+      <a href="/exerciselog">Log</a>
+      <a href="/profile">Profile</a>
+    </div>
+
     <div id="header">Exercise Log</div>
 
-  <div class="form-wrapper">
-  <h2>Exercises</h2>
-    <form id="reps-form" class="exercise-form">
-      <input placeholder="Exercise Type" name="reps-type" id="reps-type-input" type="text" />
-      <input placeholder="Repetitions" name="reps" id="reps-input" type="number" />
-      <button type="submit">Submit</button>
-    </form>
-    <br>
-  </div>
-  
-<div class="form-wrapper">
-  <h2>Runs</h2>
-    <form id="duration-form" class="exercise-form">
-      <input placeholder="Exercise Type"  name="duration-type" id="duration-type-input" type="text" />
-      <input placeholder="Duration" name="duration" id="duration-input" type="number" />
-      <button type="submit">Submit</button>
-    </form>
-    <br>
-</div>
+    <div class="form-wrapper">
+      <h2>Exercises</h2>
+      <form id="reps-form" class="exercise-form">
+        <div class="item-wrapper">
+          <div>
+            <label for="reps-type-input">Exercise Type</label>
+          </div>
+          <input
+            placeholder="Exercise Type"
+            name="reps-type"
+            id="reps-type-input"
+            type="text"
+          />
+        </div>
+        <div class="item-wrapper">
+          <div>
+            <label for="reps-input">Reps</label>
+          </div>
+          <input
+            placeholder="Repetitions"
+            name="reps"
+            id="reps-input"
+            type="number"
+          />
+        </div>
+        <div class="submit-wrapper">
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+      <br />
+    </div>
+
+    <div class="form-wrapper">
+      <h2>Runs</h2>
+      <form id="duration-form" class="exercise-form">
+        <div class="item-wrapper">
+          <div>
+            <label for="duration-type-input">Type of Run</label>
+          </div>
+          <input
+            placeholder="Exercise Type"
+            name="duration-type"
+            id="duration-type-input"
+            type="text"
+          />
+        </div>
+        <div class="item-wrapper">
+          <div>
+            <label for="duration-input">Duration in Minutes</label>
+          </div>
+          <input
+            placeholder="Duration"
+            name="duration"
+            id="duration-input"
+            type="number"
+          />
+        </div>
+        <div class="submit-wrapper">
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+      <br />
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="footer-col">
+            <h4>GrowU Navigation</h4>
+            <ul>
+              <li><a href="/about">About us</a></li>
+              <li><a href="/diary">GrowU Diary</a></li>
+              <li><a href="/exerciselog">Exercise log</a></li>
+              <li>
+                <a href="https://www.termsfeed.com/legal/privacy-policy/"
+                  >Privacy Policy</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Helpful Links</h4>
+            <ul>
+              <li><a href="#">Web</a></li>
+              <li><a href="#">App</a></li>
+              <li><a href="#">Logging Help</a></li>
+              <li><a href="#">Subscription</a></li>
+              <li><a href="#">Other Services</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>Contact Us</h4>
+            <div class="social-links">
+              <img
+                alt=""
+                src="https://icones.pro/wp-content/uploads/2021/03/logo-icone-tiktok-simbolo-noir.png"
+              />
+              <img
+                alt=""
+                src="https://www.iconpacks.net/icons/2/free-instagram-logo-icon-3497-thumb.png"
+              /><i class="fab"></i>
+              <img
+                alt=""
+                src="https://freepnglogo.com/images/all_img/1691832278twitter-x-logo-png.png"
+              /><i class="fab"></i>
+              <img
+                alt=""
+                src="https://images.freeimages.com/fic/images/icons/2779/simple_icons/4096/tumblr_4096_black.png"
+              /><i class="fab"></i>
+              <img
+                alt=""
+                src="https://cdn-icons-png.flaticon.com/256/20/20673.png"
+              /><i class="fab"></i>
+              <img
+                alt=""
+                src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/0/e/e/0eeeb19633422b1241f4306419a0f15f39d58de9.png"
+              /><i class="fab"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
 
     <script>
+      let homeButton = document.getElementById("home-button");
+      homeButton.addEventListener("click", () => {
+        window.location.href = "/";
+      });
+
+      let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+      let userAnchor = document.getElementById("userAnchor");
+      let userButton = document.getElementById("userButton");
+      if (localStorage.getItem("loggedIn") === "true") {
+        userButton.innerHTML = `Hello ${currentUser.username}!`;
+        userAnchor.setAttribute("href", "/profile");
+      }
 
       if (localStorage.getItem("loggedIn") === "false") {
         alert("Please log in before accessing this page");
         window.location.href = "/login";
       }
-
 
       document
         .getElementById("duration-form")
@@ -77,16 +209,13 @@
           const reps = document.getElementById("reps-input").value;
           const currentUser = JSON.parse(localStorage.getItem("currentUser"));
           try {
-            const response = await fetch(
-              `/r-exercise-submit`,
-              {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ rType, reps, currentUser }),
-              }
-            );
+            const response = await fetch(`/r-exercise-submit`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ rType, reps, currentUser }),
+            });
 
             if (!response.ok) {
               throw new Error("Error");

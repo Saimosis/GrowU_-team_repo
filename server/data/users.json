@@ -1,91 +1,111 @@
 [
   {
-    "username": "a",
+    "username": "asdffds",
     "email": "a@a.com",
-    "password": "a",
-    "diary": [
-      {
-        "title": "dsfasdf",
-        "date": "10/9/2024",
-        "diary": "dsfdsaf"
-      }
-    ],
-    "runs": [
-      {
-        "Exercise Type": "dasf",
-        "date": "10/9/2024",
-        "duration": "75"
-      },
-      {
-        "Exercise Type": "run",
-        "date": "10/9/2024",
-        "duration": "10"
-      }
-    ],
-    "exercises": [
-      {
-        "Exercise Type": "dasfdsf",
-        "date": "10/9/2024",
-        "reps": "4"
-      },
-      {
-        "Exercise Type": "adsfasdf",
-        "date": "10/9/2024",
-        "reps": "-3"
-      }
-    ]
+    "password": "adsfsfd",
+    "diary": [],
+    "runs": [],
+    "exercises": []
+  },
+  {
+    "username": "vvvvvvvv",
+    "email": "ab@a.com",
+    "password": "vvvvvv",
+    "diary": [],
+    "runs": [],
+    "exercises": []
   },
   {
     "username": "b",
     "email": "b@b.com",
     "password": "b",
     "diary": [],
+    "runs": [],
+    "exercises": []
+  },
+  {
+    "username": "Leo",
+    "email": "leo@leo.com",
+    "password": "Hamster303$",
+    "diary": [
+      {
+        "title": "Bob",
+        "date": "10/10/2024",
+        "diary": "Today I worked put"
+      },
+      {
+        "title": "asdf",
+        "date": "10/10/2024",
+        "diary": "asdf"
+      },
+      {
+        "title": "asdffff",
+        "date": "10/10/2024",
+        "diary": "asdfasdfadsf"
+      },
+      {
+        "title": "asdfffffff",
+        "date": "10/10/2024",
+        "diary": "asdfasdfadsfffadsfasdf"
+      }
+    ],
     "runs": [
       {
-        "type": "we",
-        "date": "10/9/2024",
+        "type": "bru",
+        "date": "10/10/2024",
+        "duration": "233"
+      },
+      {
+        "type": "da",
+        "date": "10/10/2024",
         "duration": "23"
       },
       {
-        "type": "Not a trww",
-        "date": "10/9/2024",
-        "duration": "3"
+        "type": "dada",
+        "date": "10/10/2024",
+        "duration": "12"
       }
     ],
-    "exercises": [
-      {
-        "type": "asdfasdf",
-        "date": "10/9/2024",
-        "reps": "11111111111"
-      },
-      {
-        "type": "big",
-        "date": "10/9/2024"
-      },
-      {
-        "type": "Curls",
-        "date": "10/9/2024",
-        "reps": "102"
-      }
-    ]
+    "exercises": []
   },
   {
-    "username": "fard",
-    "email": "fard@gmail.com",
-    "password": "fard",
-    "diary": [],
+    "username": "r",
+    "email": "r@r.com",
+    "password": "Hamster303$",
+    "diary": [
+      {
+        "title": "sdf",
+        "date": "10/10/2024",
+        "diary": "sdaf"
+      },
+      {
+        "title": "dasf",
+        "date": "10/10/2024",
+        "diary": "dsaf"
+      },
+      {
+        "title": "dsf",
+        "date": "10/10/2024",
+        "diary": "adsf"
+      }
+    ],
     "runs": [
       {
-        "type": "run",
-        "date": "10/9/2024",
-        "duration": "7"
+        "type": "q",
+        "date": "10/10/2024",
+        "duration": "1"
+      },
+      {
+        "type": "ee",
+        "date": "10/10/2024",
+        "duration": "23222"
       }
     ],
     "exercises": [
       {
-        "type": "bicep curls",
-        "date": "10/9/2024",
-        "reps": "10000000"
+        "type": "ddddddddddddd",
+        "date": "10/10/2024",
+        "reps": "-1"
       }
     ]
   }

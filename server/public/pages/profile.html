@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profile</title>
+    <link rel="icon" type="image/png" href="./assets/growULogo.png" />
     <style>
       .hidden {
         display: none;
@@ -12,61 +13,163 @@
     <link rel="stylesheet" href="/css/profile.css" />
   </head>
 
+  <div id="navbar">
+    <div class="growu-logo">
+      <img id="home-button" alt="" src="./assets/growULogo.png" />
+    </div>
+    <h1 class="navbar-logo">Grow U</h1>
+    <a href="/signup" id="userAnchor" class="signInLogIn"
+      ><button id="userButton">SignUp/Login</button></a
+    >
+  </div>
+  <div id="nav">
+    <a href="/about">About</a>
+    <a href="/diary">Diary</a>
+    <a href="/exerciselog">Log</a>
+    <a href="/profile">Profile</a>
+  </div>
+
   <body>
-    
-    <h1 id="user-name"></h1>
-    <h1>Diary Entries</h1>
-    <table id="usersTable">
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Date</th>
-          <th>Entry</th>
-        </tr>
-      </thead>
-      <tbody id="userTableBody">
-        <!-- data of users will be rendered here -->
-      </tbody>
-    </table>
+    <div id="profile-wrapper">
+      <h1 id="user-name"></h1>
+      <div id="diary-wrapper">
+        <h1>Diary Entries</h1>
+        <hr />
+        <table id="usersTable">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Date</th>
+              <th>Entry</th>
+            </tr>
+          </thead>
+          <tbody id="userTableBody"></tbody>
+        </table>
+      </div>
 
-    <h1>Running Logs</h1>
-    <table id="runningTable">
-      <thead>
-        <tr>
-          <th>Exercise Type</th>
-          <th>Date</th>
-          <th>Duration</th>
-        </tr>
-      </thead>
-      <tbody id="runningTableBody">
-        <!-- data of users will be rendered here -->
-      </tbody>
-    </table>
-    <h1>Exercise Logs</h1>
-    <table id="exerciseTable">
-      <thead>
-        <tr>
-          <th>Exercise Type</th>
-          <th>Date</th>
-          <th>Reps</th>
-        </tr>
-      </thead>
-      <tbody id="exerciseTableBody">
-        <!-- data of users will be rendered here -->
-      </tbody>
-    </table>
-    <div id="exercise-edit-form"></div>
-    <button id="log-out-button">Log Out</button>
+      <div class="grid-wrapper" id="run-wrapper">
+        <div>
+          <h1>Running Logs</h1>
+          <hr />
+          <table id="runningTable">
+            <thead>
+              <tr>
+                <th>Exercise Type</th>
+                <th>Date</th>
+                <th>Duration</th>
+              </tr>
+            </thead>
+            <tbody id="runningTableBody"></tbody>
+          </table>
+        </div>
+        <div id="edit-form"></div>
+      </div>
 
+      <div class="grid-wrapper" id="exercise-wrapper">
+        <div>
+          <h1>Exercise Logs</h1>
+          <hr />
+          <table id="exerciseTable">
+            <thead>
+              <tr>
+                <th>Exercise Type</th>
+                <th>Date</th>
+                <th>Reps</th>
+              </tr>
+            </thead>
+            <tbody id="exerciseTableBody">
+              <!-- data of users will be rendered here -->
+            </tbody>
+          </table>
+        </div>
+        <div id="exercise-edit-form"></div>
+      </div>
+      <div id="log-out-wrapper">
+        <button id="log-out-button">Log Out</button>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="footer-col">
+            <h4>GrowU Navigation</h4>
+            <ul>
+              <li><a href="/about">About us</a></li>
+              <li><a href="/diary">GrowU Diary</a></li>
+              <li><a href="/exerciselog">Exercise log</a></li>
+              <li>
+                <a href="https://www.termsfeed.com/legal/privacy-policy/"
+                  >Privacy Policy</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Helpful Links</h4>
+            <ul>
+              <li><a href="#">Web</a></li>
+              <li><a href="#">App</a></li>
+              <li><a href="#">Logging Help</a></li>
+              <li><a href="#">Subscription</a></li>
+              <li><a href="#">Other Services</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>Contact Us</h4>
+            <div class="social-links">
+              <img
+                alt=""
+                src="https://icones.pro/wp-content/uploads/2021/03/logo-icone-tiktok-simbolo-noir.png"
+              />
+              <img
+                alt=""
+                src="https://www.iconpacks.net/icons/2/free-instagram-logo-icon-3497-thumb.png"
+              /><i class="fab"></i>
+              <img
+                alt=""
+                src="https://freepnglogo.com/images/all_img/1691832278twitter-x-logo-png.png"
+              /><i class="fab"></i>
+              <img
+                alt=""
+                src="https://images.freeimages.com/fic/images/icons/2779/simple_icons/4096/tumblr_4096_black.png"
+              /><i class="fab"></i>
+              <img
+                alt=""
+                src="https://cdn-icons-png.flaticon.com/256/20/20673.png"
+              /><i class="fab"></i>
+              <img
+                alt=""
+                src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/0/e/e/0eeeb19633422b1241f4306419a0f15f39d58de9.png"
+              /><i class="fab"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
 
     <script>
+      let homeButton = document.getElementById("home-button");
+      homeButton.addEventListener("click", () => {
+        window.location.href = "/";
+      });
+
+      let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+      let userAnchor = document.getElementById("userAnchor");
+      let userButton = document.getElementById("userButton");
+      if (localStorage.getItem("loggedIn") === "true") {
+        userButton.innerHTML = `Hello ${currentUser.username}!`;
+        userAnchor.setAttribute("href", "/profile");
+      }
+
       if (localStorage.getItem("loggedIn") === "false") {
         alert("Please log in before accessing this page");
         window.location.href = "/login";
       } else {
         let currentUser = JSON.parse(localStorage.getItem("currentUser"));
         let userName = document.getElementById("user-name");
-        userName.innerHTML = currentUser.username;
+        userName.innerHTML = `Hello ${currentUser.username}`;
 
         async function fetchUsers() {
           try {
@@ -102,7 +205,7 @@
           try {
             let index = 0;
             currentUser.runs.forEach((entry) => {
-              const row = `<tr id="row-${index}"><td>${entry.type}</td><td>${entry.date}</td><td>${entry.duration} min</td><td><button data-index="${index}" class="delete-button">X</button></td><button edit-index="${index}" class="edit-button">Edit</button></td></tr>`;
+              const row = `<tr id="row-${index}"><td>${entry.type}</td><td>${entry.date}</td><td>${entry.duration} min</td><td><button data-index="${index}" class="delete-button">X</button></td><td><button edit-index="${index}" class="edit-button">Edit</button></td></tr>`;
               index++;
               tableBody.innerHTML += row;
             });
@@ -138,26 +241,46 @@
               } else if (e.target.classList.contains("edit-button")) {
                 let editForm = document.getElementById("edit-form");
                 editForm.innerHTML = "";
-                const index = event.target.getAttribute("edit-index");
-                const entry = currentUser.runs[index]; // Get entry by index
                 e.target.classList.add("hidden");
                 console.log(e.target);
-                let newCell = document.createElement("div");
+                let newCell = document.createElement("form");
+                newCell.classList.add("edit-form");
+                const index = event.target.getAttribute("edit-index");
+                const entry = currentUser.runs[index]; // Get entry by index
+                let closeButton = document.createElement("button");
+                closeButton.classList.add("close");
+                closeButton.innerHTML = "X";
+                newCell.appendChild(closeButton);
+                closeButton.addEventListener("click", () => {
+                  editForm.innerHTML = "";
+                });
+                let currentType = document.createElement("p");
+                currentType.innerHTML = `Current Type: ${entry.type}`;
+                newCell.appendChild(currentType);
+                let currentDuration = document.createElement("p");
+                currentDuration.innerHTML = `Current Duration: ${entry.duration}`;
+                newCell.appendChild(currentDuration);
                 let newTypeInput = document.createElement("input");
                 newTypeInput.id = "newType";
-                let newTypeHeader = document.createElement("h1");
+                newTypeInput.required = true;
+                let newTypeHeader = document.createElement("h2");
                 newTypeHeader.innerHTML = "New Type";
                 newCell.appendChild(newTypeHeader);
                 newCell.appendChild(newTypeInput);
                 let newDurationInput = document.createElement("input");
                 newDurationInput.setAttribute("type", "number");
                 newDurationInput.id = "newDuration";
-                let newDurationHeader = document.createElement("h1");
+                newDurationInput.required = true;
+                let newDurationHeader = document.createElement("h2");
                 newDurationHeader.innerHTML = "New Duration";
                 newCell.appendChild(newDurationHeader);
                 newCell.appendChild(newDurationInput);
+                let br = document.createElement("br");
+                newCell.appendChild(br);
                 let newSubmit = document.createElement("button");
+                newSubmit.classList.add("submit-edit");
                 newSubmit.innerHTML = "Submit";
+                newSubmit.setAttribute("type", "submit");
                 newCell.appendChild(newSubmit);
                 editForm.appendChild(newCell);
                 newSubmit.addEventListener("click", async () => {
@@ -185,12 +308,12 @@
                       throw new Error("Problem fetching delete endpoint");
                     }
                     const data = await response.json();
+                    let user = data.user;
+                    localStorage.setItem("currentUser", JSON.stringify(user));
                     renderRuns();
                     if (data.reload) {
                       window.location.reload();
                     }
-                    let user = data.user;
-                    localStorage.setItem("currentUser", JSON.stringify(user));
                   } catch (error) {
                     console.error("Error deleting run entry:", error);
                   }
@@ -205,21 +328,20 @@
         }
         document.addEventListener("DOMContentLoaded", renderRuns);
 
-
         async function renderExercises() {
           const tableBody = document.getElementById("exerciseTableBody");
           tableBody.innerHTML = "";
           try {
             let index = 0;
             currentUser.exercises.forEach((entry) => {
-              const row = `<tr id="row-${index}"><td>${entry.type}</td><td>${entry.date}</td><td>${entry.reps} reps</td><td><button data-index="${index}" class="delete-button">X</button></td><button edit-index="${index}" class="edit-button">Edit</button></td></tr>`;
+              const row = `<tr id="row-${index}"><td>${entry.type}</td><td>${entry.date}</td><td>${entry.reps} reps</td><td><button data-index="${index}" class="delete-button">X</button></td><td><button edit-index="${index}" class="edit-button">Edit</button></td></tr>`;
               index++;
               tableBody.innerHTML += row;
             });
             tableBody.addEventListener("click", async (e) => {
               if (e.target.classList.contains("delete-button")) {
                 const index = event.target.getAttribute("data-index");
-                const entry = currentUser.runs[index]; // Get entry by index
+                const entry = currentUser.exercises[index]; // Get entry by index
                 try {
                   console.log(entry, currentUser);
                   const response = await fetch("/exercise-delete", {
@@ -246,35 +368,52 @@
                   console.error("Error deleting run entry:", error);
                 }
               } else if (e.target.classList.contains("edit-button")) {
-                let exerciseEditForm = document.getElementById("exercise-edit-form");
+                let exerciseEditForm =
+                  document.getElementById("exercise-edit-form");
                 exerciseEditForm.innerHTML = "";
                 const index = event.target.getAttribute("edit-index");
                 const entry = currentUser.exercises[index]; // Get entry by index
                 e.target.classList.add("hidden");
                 console.log(e.target);
                 let newCell = document.createElement("div");
+                newCell.classList.add("edit-form");
+                let closeButton = document.createElement("button");
+                closeButton.classList.add("close");
+                closeButton.innerHTML = "X";
+                newCell.appendChild(closeButton);
+                closeButton.addEventListener("click", () => {
+                  exerciseEditForm.innerHTML = "";
+                });
+                let currentType = document.createElement("p");
+                currentType.innerHTML = `Current Type: ${entry.type}`;
+                newCell.appendChild(currentType);
+                let currentReps = document.createElement("p");
+                currentReps.innerHTML = `Current Reps: ${entry.reps}`;
+                newCell.appendChild(currentReps);
                 let newTypeInput = document.createElement("input");
                 newTypeInput.id = "newType";
-                let newTypeHeader = document.createElement("h1");
+                let newTypeHeader = document.createElement("h2");
                 newTypeHeader.innerHTML = "New Type";
                 newCell.appendChild(newTypeHeader);
                 newCell.appendChild(newTypeInput);
                 let newRepsInput = document.createElement("input");
                 newRepsInput.setAttribute("type", "number");
                 newRepsInput.id = "newReps";
-                let newRepsHeader = document.createElement("h1");
+                let newRepsHeader = document.createElement("h2");
                 newRepsHeader.innerHTML = "New Reps";
                 newCell.appendChild(newRepsHeader);
                 newCell.appendChild(newRepsInput);
+                let br = document.createElement("br");
+                newCell.appendChild(br);
                 let newSubmit = document.createElement("button");
+                newSubmit.classList.add("submit-edit");
                 newSubmit.innerHTML = "Submit";
                 newCell.appendChild(newSubmit);
                 exerciseEditForm.appendChild(newCell);
                 newSubmit.addEventListener("click", async () => {
                   try {
                     const newType = document.getElementById("newType").value;
-                    const newReps =
-                      document.getElementById("newReps").value;
+                    const newReps = document.getElementById("newReps").value;
                     let newEntry = {
                       type: newType,
                       reps: newReps,

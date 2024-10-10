@@ -1,27 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="/css/diary.css" />
-</head>
+    <link rel="icon" type="image/png" href="./assets/growULogo.png" />
+  </head>
 
-<body>
-
-    <div id="header">
-        Wellness Diary
+  <body>
+    <div id="navbar">
+      <div class="growu-logo">
+        <img id="home-button" alt="" src="./assets/growULogo.png" />
+      </div>
+      <h1 class="navbar-logo">Grow U</h1>
+      <a href="/signup" id="userAnchor" class="signInLogIn"
+        ><button id="userButton">SignUp/Login</button></a
+      >
+    </div>
+    <div id="nav">
+      <a href="/about">About</a>
+      <a href="/diary">Diary</a>
+      <a href="/exerciselog">Log</a>
+      <a href="/profile">Profile</a>
     </div>
 
+    <div id="header">Wellness Diary</div>
+
     <form id="diary-form">
-    <input name="title" id="title-input" type="text">
-    <textarea name="diary" id="diary-input" cols="30" rows="10"></textarea>
-    <button type="submit">Submit</button>
+      <div class="item-wrapper">
+        <div>
+          <label for="title-input">Entry Title</label>
+        </div>
+        <br />
+        <input
+          title=""
+          placeholder="Entry Title"
+          name="title"
+          id="title-input"
+          type="text"
+        />
+      </div>
+      <div class="item-wrapper">
+        <div>
+          <label for="diary-input">Diary Entry</label>
+        </div>
+        <br />
+        <textarea name="diary" id="diary-input" cols="30" rows="10"></textarea>
+      </div>
+      <div id="submit-wrapper">
+        <button type="submit">Submit</button>
+      </div>
     </form>
 
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="footer-col">
+            <h4>GrowU Navigation</h4>
+            <ul>
+              <li><a href="/about">About us</a></li>
+              <li><a href="/diary">GrowU Diary</a></li>
+              <li><a href="/exerciselog">Exercise log</a></li>
+              <li>
+                <a href="https://www.termsfeed.com/legal/privacy-policy/"
+                  >Privacy Policy</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Helpful Links</h4>
+            <ul>
+              <li><a href="#">Web</a></li>
+              <li><a href="#">App</a></li>
+              <li><a href="#">Logging Help</a></li>
+              <li><a href="#">Subscription</a></li>
+              <li><a href="#">Other Services</a></li>
+            </ul>
+          </div>
 
+          <div class="footer-col">
+            <h4>Contact Us</h4>
+            <div class="social-links">
+              <img
+                alt=""
+                src="https://icones.pro/wp-content/uploads/2021/03/logo-icone-tiktok-simbolo-noir.png"
+              />
+              <img
+                alt=""
+                src="https://www.iconpacks.net/icons/2/free-instagram-logo-icon-3497-thumb.png"
+              /><i class="fab"></i>
+              <img
+                alt=""
+                src="https://freepnglogo.com/images/all_img/1691832278twitter-x-logo-png.png"
+              /><i class="fab"></i>
+              <img
+                alt=""
+                src="https://images.freeimages.com/fic/images/icons/2779/simple_icons/4096/tumblr_4096_black.png"
+              /><i class="fab"></i>
+              <img
+                alt=""
+                src="https://cdn-icons-png.flaticon.com/256/20/20673.png"
+              /><i class="fab"></i>
+              <img
+                alt=""
+                src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/0/e/e/0eeeb19633422b1241f4306419a0f15f39d58de9.png"
+              /><i class="fab"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
 
-   <script>
+    <script>
+      let homeButton = document.getElementById("home-button");
+      homeButton.addEventListener("click", () => {
+        window.location.href = "/";
+      });
+
+      let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+      let userAnchor = document.getElementById("userAnchor");
+      let userButton = document.getElementById("userButton");
+      if (localStorage.getItem("loggedIn") === "true") {
+        userButton.innerHTML = `Hello ${currentUser.username}!`;
+        userAnchor.setAttribute("href", "/profile");
+      }
 
       if (localStorage.getItem("loggedIn") === "false") {
         alert("Please log in before accessing this page");
@@ -36,13 +140,16 @@
           const diary = document.getElementById("diary-input").value;
           const currentUser = localStorage.getItem("currentUser");
           try {
-            const response = await fetch(`/diary-submit/${title}/${diary}/${currentUser}`, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({ title, diary, currentUser }),
-            });
+            const response = await fetch(
+              "/diary-submit",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ title, diary, currentUser }),
+              }
+            );
 
             if (!response.ok) {
               throw new Error("Error");
@@ -57,7 +164,6 @@
             alert("Diary Entry Failed: " + error.message);
           }
         });
-
-   </script> 
-</body>
+    </script>
+  </body>
 </html>

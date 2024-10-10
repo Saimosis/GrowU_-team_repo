@@ -1,34 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-     <link rel="stylesheet" href="/css/about.css" />
-</head>
+    <link rel="stylesheet" href="/css/about.css" />
+    <link rel="icon" type="image/png" href="./assets/growULogo.png" />
+  </head>
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Chicle&family=Sofadi+One&display=swap');
-</style>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Chicle&family=Sofadi+One&display=swap");
+  </style>
 
-<body>
-
-    <div id="wrapper">
-        
-  
-    
-    <div id="page-text">
-          <div id="header">About Us</div>
-        
-        <p>At GrowU, we believe that true wellness is a harmonious blend of physical 
-        health and mental clarity. Our mission is to empower you on your journey to better health through personalized
-         tracking tools, insightful resources, and a supportive community. Whether you're aiming to improve your fitness,
-          manage stress, or cultivate mindfulness, our platform offers innovative solutions tailored to your unique needs. 
-          Join us as we explore the transformative power of self-awareness and healthy habits—because your well-being is worth
-           tracking!</p></div>
-           
-
+  <body>
+    <div id="navbar">
+      <div class="growu-logo">
+        <img id="home-button" alt="" src="./assets/growULogo.png" />
+      </div>
+      <h1 class="navbar-logo">Grow U</h1>
+      <a href="/signup" id="userAnchor" class="signInLogIn"
+        ><button id="userButton">SignUp/Login</button></a
+      >
+    </div>
+    <div id="nav">
+      <a href="/about">About</a>
+      <a href="/diary">Diary</a>
+      <a href="/exerciselog">Log</a>
+      <a href="/profile">Profile</a>
     </div>
 
-</body>
+    <div id="wrapper">
+      <div id="page-text">
+        <div id="header">About Us</div>
+
+        <p>
+          At GrowU, we believe that true wellness is a harmonious blend of
+          physical health and mental clarity. Our mission is to empower you on
+          your journey to better health through personalized tracking tools,
+          insightful resources, and a supportive community. Whether you're
+          aiming to improve your fitness, manage stress, or cultivate
+          mindfulness, our platform offers innovative solutions tailored to your
+          unique needs. Join us as we explore the transformative power of
+          self-awareness and healthy habits—because your well-being is worth
+          tracking!
+        </p>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="footer-col">
+            <h4>GrowU Navigation</h4>
+            <ul>
+              <li><a href="/about">About us</a></li>
+              <li><a href="/diary">GrowU Diary</a></li>
+              <li><a href="/exerciselog">Exercise log</a></li>
+              <li>
+                <a href="https://www.termsfeed.com/legal/privacy-policy/"
+                  >Privacy Policy</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Helpful Links</h4>
+            <ul>
+              <li><a href="#">Web</a></li>
+              <li><a href="#">App</a></li>
+              <li><a href="#">Logging Help</a></li>
+              <li><a href="#">Subscription</a></li>
+              <li><a href="#">Other Services</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>Contact Us</h4>
+            <div class="social-links">
+              <img
+                alt=""
+                src="https://icones.pro/wp-content/uploads/2021/03/logo-icone-tiktok-simbolo-noir.png"
+              />
+              <img
+                alt=""
+                src="https://www.iconpacks.net/icons/2/free-instagram-logo-icon-3497-thumb.png"
+              /><i class="fab"></i>
+              <img
+                alt=""
+                src="https://freepnglogo.com/images/all_img/1691832278twitter-x-logo-png.png"
+              /><i class="fab"></i>
+              <img
+                alt=""
+                src="https://images.freeimages.com/fic/images/icons/2779/simple_icons/4096/tumblr_4096_black.png"
+              /><i class="fab"></i>
+              <img
+                alt=""
+                src="https://cdn-icons-png.flaticon.com/256/20/20673.png"
+              /><i class="fab"></i>
+              <img
+                alt=""
+                src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/0/e/e/0eeeb19633422b1241f4306419a0f15f39d58de9.png"
+              /><i class="fab"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+      let userAnchor = document.getElementById("userAnchor");
+      let userButton = document.getElementById("userButton");
+      if (localStorage.getItem("loggedIn") === "true") {
+        userButton.innerHTML = `Hello ${currentUser.username}!`;
+        userAnchor.setAttribute("href", "/profile");
+      }
+
+      let homeButton = document.getElementById("home-button");
+      homeButton.addEventListener("click", () => {
+        window.location.href = "/";
+      });
+    </script>
+  </body>
 </html>

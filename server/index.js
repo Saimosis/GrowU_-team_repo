@@ -75,10 +75,8 @@ app.post("/sign-up", async (req, res) => {
     const users = JSON.parse(data);
     // if file doesn't exist or is empty, start with an empty array
     // find or create user
-    let user = users.find(
-      (u) =>
-        u.email === email && u.username === username && u.password === password
-    );
+    let user = users.find((u) => u.email === email);
+    console.log(user);
     if (user) {
       res.status(409).json({ error: "This user already exist" });
     } else {
@@ -86,12 +84,9 @@ app.post("/sign-up", async (req, res) => {
 
       user = { username, email, password, diary: [], runs: [], exercises: [] };
       users.push(user);
+      await fs.writeFile(dataPath, JSON.stringify(users, null, 2));
       res.status(200).json(user);
     }
-
-    // save updated users
-    await fs.writeFile(dataPath, JSON.stringify(users, null, 2));
-    // res.redirect('/login');
   } catch (error) {
     console.error("Error processing form:", error);
     res
@@ -99,9 +94,6 @@ app.post("/sign-up", async (req, res) => {
       .json({ error: "An error occurred while processing your submission." });
   }
 });
-
-
-
 
 app.post("/r-exercise-submit", async (req, res) => {
   try {
@@ -147,8 +139,6 @@ app.post("/r-exercise-submit", async (req, res) => {
   }
 });
 
-
-
 app.delete("/exercise-delete", async (req, res) => {
   try {
     let { entry, currentUser } = req.body;
@@ -174,7 +164,8 @@ app.delete("/exercise-delete", async (req, res) => {
       return res.status(404).json({ error: "User not found" });
     }
     let user = users[userIndex];
-    console.log(user.runs[0]["Exercise Type"]);
+    console.log(user.exercises[0].type);
+    console.log(entry);
     let exerciseIndex = user.exercises.findIndex(
       (exercise) =>
         exercise.type === entry.type &&
@@ -182,12 +173,13 @@ app.delete("/exercise-delete", async (req, res) => {
         exercise.reps === entry.reps
     );
     console.log(exerciseIndex);
+    console.log(exerciseIndex);
     if (exerciseIndex === -1) {
       return res.status(404).json({ error: "Exercise not found" });
     }
     //   users[userIndex].diary.push(entry);
     users[userIndex].exercises.splice(exerciseIndex, 1);
-    console.log(users[userIndex])
+    console.log(users[userIndex]);
     try {
       await fs.writeFile(dataPath, JSON.stringify(users, null, 2));
     } catch (error) {
@@ -200,8 +192,6 @@ app.delete("/exercise-delete", async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
-
-
 
 app.put("/exercise-edit", async (req, res) => {
   try {
@@ -238,11 +228,16 @@ app.put("/exercise-edit", async (req, res) => {
     console.log(exerciseIndex);
     if (exerciseIndex === -1) {
       return res.status(404).json({ error: "Run not found" });
-      }
+    }
 
-      users[userIndex].exercises[exerciseIndex] = { ...users[userIndex].exercises[exerciseIndex], type: newEntry.type, date: entry.date, reps: newEntry.reps}
-      
-    console.log(users[userIndex])
+    users[userIndex].exercises[exerciseIndex] = {
+      ...users[userIndex].exercises[exerciseIndex],
+      type: newEntry.type,
+      date: entry.date,
+      reps: newEntry.reps,
+    };
+
+    console.log(users[userIndex]);
     try {
       await fs.writeFile(dataPath, JSON.stringify(users, null, 2));
     } catch (error) {
@@ -255,8 +250,6 @@ app.put("/exercise-edit", async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
-
-
 
 app.post("/d-exercise-submit", async (req, res) => {
   try {
@@ -302,64 +295,9 @@ app.post("/d-exercise-submit", async (req, res) => {
   }
 });
 
-
-
 app.delete("/run-delete", async (req, res) => {
   try {
     let { entry, currentUser } = req.body;
-
-    if (!currentUser || !entry) {
-      return res.status(400).json({ error: "Invalid request data" });
-    }
-
-    // try to read the users.json file and cache as data
-    const data = await fs.readFile(dataPath, "utf8");
-    // parse the data
-    let users = JSON.parse(data);
-
-    // cache the userIndex based on a matching name and email
-    let userIndex = users.findIndex(
-      (user) =>
-        user.username === currentUser.username &&
-        user.email === currentUser.email &&
-        user.password === currentUser.password
-    );
-    console.log(userIndex);
-    if (userIndex === -1) {
-      return res.status(404).json({ error: "User not found" });
-    }
-    let user = users[userIndex];
-    console.log(user.runs[0]["Exercise Type"]);
-    let runIndex = user.runs.findIndex(
-      (run) =>
-        run["Exercise Type"] === entry["Exercise Type"] &&
-        run.date === entry.date &&
-        run.duration === entry.duration
-    );
-    console.log(runIndex);
-    if (runIndex === -1) {
-      return res.status(404).json({ error: "Run not found" });
-    }
-    //   users[userIndex].diary.push(entry);
-    users[userIndex].runs.splice(runIndex, 1);
-    console.log(users[userIndex])
-    try {
-      await fs.writeFile(dataPath, JSON.stringify(users, null, 2));
-    } catch (error) {
-      console.error("Failed to write to database");
-    }
-    res.status(200).json({ user, reload: true });
-    // send a success deleted message
-  } catch (error) {
-    console.error(error.message);
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
-
-
-app.put("/run-edit", async (req, res) => {
-  try {
-    let { entry, newEntry, currentUser } = req.body;
 
     if (!currentUser || !entry) {
       return res.status(400).json({ error: "Invalid request data" });
@@ -392,16 +330,10 @@ app.put("/run-edit", async (req, res) => {
     console.log(runIndex);
     if (runIndex === -1) {
       return res.status(404).json({ error: "Run not found" });
-      }
-
-      users[userIndex].runs[runIndex] = { ...users[userIndex].runs[runIndex], type: newEntry.type, date: entry.date, duration: newEntry.duration}
-
-
-    //   users[userIndex].runs[runIndex]["Exercise Type"] = newEntry["Exercise Type"];
-    //   users[userIndex].runs[runIndex].duration = newEntry.duration;
+    }
     //   users[userIndex].diary.push(entry);
-    // users[userIndex].runs.splice(runIndex, 1);
-    console.log(users[userIndex])
+    users[userIndex].runs.splice(runIndex, 1);
+    console.log(users[userIndex]);
     try {
       await fs.writeFile(dataPath, JSON.stringify(users, null, 2));
     } catch (error) {
@@ -415,8 +347,71 @@ app.put("/run-edit", async (req, res) => {
   }
 });
 
+app.put("/run-edit", async (req, res) => {
+  try {
+    let { entry, newEntry, currentUser } = req.body;
 
-app.post("/diary-submit/:title/:diary/:currentUser", async (req, res) => {
+    if (!currentUser || !entry) {
+      return res.status(400).json({ error: "Invalid request data" });
+    }
+
+    // try to read the users.json file and cache as data
+    const data = await fs.readFile(dataPath, "utf8");
+    // parse the data
+    let users = JSON.parse(data);
+
+    console.log(users);
+    // cache the userIndex based on a matching name and email
+    let userIndex = users.findIndex(
+      (user) =>
+        user.username === currentUser.username &&
+        user.email === currentUser.email &&
+        user.password === currentUser.password
+    );
+    console.log(userIndex);
+    if (userIndex === -1) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    // console.log(user.runs[0].type);
+    let user = users[userIndex];
+    let runIndex = user.runs.findIndex(
+      (run) =>
+        run.type === entry.type &&
+        run.date === entry.date &&
+        run.duration === entry.duration
+    );
+    console.log(runIndex);
+    if (runIndex === -1) {
+      return res.status(404).json({ error: "Run not found" });
+    }
+
+    users[userIndex].runs[runIndex] = {
+      ...users[userIndex].runs[runIndex],
+      type: newEntry.type,
+      date: entry.date,
+      duration: newEntry.duration,
+    };
+
+    //   users[userIndex].runs[runIndex]["Exercise Type"] = newEntry["Exercise Type"];
+    //   users[userIndex].runs[runIndex].duration = newEntry.duration;
+    //   users[userIndex].diary.push(entry);
+    // users[userIndex].runs.splice(runIndex, 1);
+    console.log(users[userIndex]);
+    try {
+      await fs.writeFile(dataPath, JSON.stringify(users, null, 2));
+      // let user = users[userIndex];
+      res.status(200).json({ user, reload: true });
+    } catch (error) {
+      console.error("Failed to write to database");
+    }
+    // send a success deleted message
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+app.post("/diary-submit", async (req, res) => {
   try {
     let { title, diary, currentUser } = req.body;
     // read existing users from file
@@ -436,7 +431,7 @@ app.post("/diary-submit/:title/:diary/:currentUser", async (req, res) => {
       if (userIndex === -1) {
         return res.status(404).json({ message: " User not found" });
       }
-      console.log(" current user is " + currentUser.name);
+      // console.log(" current user is " + currentUser.name);
 
       const date = new Date();
       const year = date.getFullYear();
@@ -448,11 +443,8 @@ app.post("/diary-submit/:title/:diary/:currentUser", async (req, res) => {
       let entry = { title: title, date: fullDate, diary: diary };
       users[userIndex].diary.push(entry);
       console.log(users);
-      let user = users.find(
-        (user) =>
-          user.username === currentUser.username &&
-          user.email === currentUser.email
-      );
+      let user = users[userIndex];
+      console.log(user);
       res.status(200).json(user);
       await fs.writeFile(dataPath, JSON.stringify(users, null, 2));
     }
@@ -485,7 +477,6 @@ app.post("/log-in/:email/:password", async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
-
 
 // Start the server
 const PORT = process.env.PORT || 3000;
