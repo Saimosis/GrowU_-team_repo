@@ -1,10 +1,32 @@
 @import url("https://fonts.googleapis.com/css2?family=Chicle&family=Sofadi+One&display=swap");
+html, body {
+  margin: 0;
+  padding: 0
+}
+
+/* ADDED HTML BODY TO MAKE THE FOOTER STAY */
+
 body {
   background-color: #3f6a6e;
   background-image: url("./assets/growuBackground.png");
   background-size: cover;
   font-family: "Chicle";
 }
+/* THE START OF THE CONTENT PAGE */
+
+.content-container {
+  background-color: blue;
+  width: 80vw;
+  min-height: 60vh;
+  align-items: center;
+  border-radius: 25px;
+  padding: 20px;
+  margin: 5vh auto;
+}
+
+/* ADDED "margin: 1vh auto;" TO MAKE ITEMS IN MIDDLE TO NOT STICK */
+
+/* THE END OF THE CONTENT PAGE */
 
 #navbar {
   overflow: hidden;
@@ -114,7 +136,8 @@ ul {
   background-color: #050e14;
   padding: 20px 0;
   min-height: 10vw;
-  position: fixed;
+/*   TOOK AWAY "position: fixed;" to let other content in the middle to stay */
+/*   position: fixed; */
   left: 0;
   bottom: 0;
   width: 100%;
@@ -158,6 +181,7 @@ ul {
   color: #b5f2f8;
   padding-left: 8px;
 }
+
 .footer-col .social-links a {
   display: inline-block;
   height: 40px;
@@ -196,18 +220,3 @@ ul {
   padding: 5px;
 }
 
-/* ul.navrow { */
-/* display: grid; */
-/* grid-template-columns: repeat(4, 1fr); */
-/* justify-content: space-around; */
-/* text-align: center; */
-/* flex-direction: row; */
-/* } */
-/* ul.navrow li { */
-/* display: block; */
-/* min-width: 10%; */
-/* flex: 1; */
-/* } */
-/* ul.navrow li a { */
-/* display: block; */
-/* } */
