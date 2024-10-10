@@ -56,7 +56,7 @@
     <button id="log-out-button">Log Out</button>
     <script>
       if (localStorage.getItem("loggedIn") === "false") {
-        alert("LOGIN");
+        alert("Please log in before accessing this page");
         window.location.href = "/login";
       } else {
         let currentUser = JSON.parse(localStorage.getItem("currentUser"));

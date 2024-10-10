@@ -28,6 +28,17 @@ body {
     border: 1px solid black; */
 }
 
+#img-wrapper {
+  /* background-color: red; */
+  width: 80%;
+  margin: auto;
+  margin-top: 10vh;
+  text-align: center;
+  img {
+    width: 100%;
+  }
+}
+
 #form-col {
   h1 {
     text-align: center;

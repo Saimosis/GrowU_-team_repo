@@ -9,7 +9,11 @@
   <body>
     <nav></nav>
     <div id="signup-wrapper">
-      <div class="col"></div>
+      <div class="col">
+        <div id="img-wrapper">
+          <img src="/assets/guy-working-out.png" alt="" />
+        </div>
+      </div>
       <div class="col" id="form-col">
         <h1 class="lexend bold">Sign Up</h1>
         <form id="create-form">
@@ -67,7 +71,6 @@
       });
       // console.log(sessionStorage.getItem("loggedIn"));
 
-
       document
         .getElementById("create-form")
         .addEventListener("submit", async (e) => {
@@ -97,7 +100,6 @@
             alert("Sign-Up Failed: " + error.message);
           }
         });
-
     </script>
   </body>
 </html>
