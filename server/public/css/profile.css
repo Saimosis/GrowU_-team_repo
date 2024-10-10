@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Chicle&family=Sofadi+One&display=swap');
+
+body {
+    font-family: "Chicle";
+}
+
+button {
+    font-family: "Chicle";
+}
+
+#user-name {
+    border: 1px solid black;
+}
+#usersTable {
+    border: 1px solid black;
+}
+
+
+#runningTable {
+    border: 1px solid black;
+}
+

@@ -10,17 +10,25 @@
   <body>
     <div id="header">Exercise Log</div>
 
-    <form id="reps-form">
-      <input name="reps-type" id="reps-type-input" type="text" />
-      <input name="reps" id="reps-input" type="number" />
+  <div class="form-wrapper">
+  <h2>Exercises</h2>
+    <form id="reps-form" class="exercise-form">
+      <input placeholder="Exercise Type" name="reps-type" id="reps-type-input" type="text" />
+      <input placeholder="Repetitions" name="reps" id="reps-input" type="number" />
       <button type="submit">Submit</button>
     </form>
-
-    <form id="duration-form">
-      <input name="duration-type" id="duration-type-input" type="text" />
-      <input name="duration" id="duration-input" type="number" />
+    <br>
+  </div>
+  
+<div class="form-wrapper">
+  <h2>Runs</h2>
+    <form id="duration-form" class="exercise-form">
+      <input placeholder="Exercise Type"  name="duration-type" id="duration-type-input" type="text" />
+      <input placeholder="Duration" name="duration" id="duration-input" type="number" />
       <button type="submit">Submit</button>
     </form>
+    <br>
+</div>
 
     <script>
       document

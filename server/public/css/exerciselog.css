@@ -18,14 +18,33 @@ body {
     background-color: white;
 }
 
-#reps-form {
+#reps-type-input {
+    max-height: 50%;
+} 
+
+.form-wrapper {
     border: 2px solid black;
-    margin: 5px;
     background-color: white;
+    min-height: 10vh;
+    text-align:center
+}
+
+.exercise-form {
+    border: 2px solid black;
+    margin: auto;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #duration-form {
-    border: 2px solid black;
-    margin: 5px;
-    background-color: white;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#duration-type-input {
+    max-height: 50%;
 }
